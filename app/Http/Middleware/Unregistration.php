@@ -16,7 +16,7 @@ class Unregistration
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->requested_by){
+        if (Auth::user()->request_by){
             return redirect(route('home'));
         }
         return $next($request);

@@ -23,7 +23,9 @@ Auth::routes();
 
 Route::get('/registration', 'RegistrationController@registration')->name('registration');
 Route::get('/invitation', 'RegistrationController@invitation')->name('invitation');
+Route::post('/invitation', 'RegistrationController@postinvitation');
 Route::get('/upload', 'RegistrationController@upload')->name('upload');
+Route::get('/debug', 'RegistrationController@debug')->name('debug');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

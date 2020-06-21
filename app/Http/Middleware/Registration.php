@@ -17,7 +17,7 @@ class Registration
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->requested_by){
+        if (!Auth::user()->request_by || !Auth::user()->is_complete){
             return redirect(route('registration'));
         }
         return $next($request);

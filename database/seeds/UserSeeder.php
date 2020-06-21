@@ -219,21 +219,30 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        $requested_by = 0;
+        $mUser = new User();
+        $mUser->name = 'Admin';
+        $mUser->email = str_replace(' ', '', 'admin' . '@gmail.com');
+        $mUser->birth_dt = '1996-07-02';
+        $mUser->is_complete = '1';
+        $mUser->password = Hash::make('123456');
+        $mUser->invitation_cd = Str::random(5);
+        $mUser->save();
+
+        $request_by = 0;
         foreach ($aarUsers as $i =>$user){
+            if ($i > 20)
+                break;
+
             $mUser = new User();
             $mUser->name = $user['name'];
-            $mUser->email = str_replace(' ', '', $user['name'] . '@gmail.com');
+            $mUser->email = strtolower(str_replace(' ', '', $user['name'] . '@gmail.com'));
             $mUser->birth_dt = $user['birth_dt'];
             $mUser->password = Hash::make('123456');
-            $mUser->requested_by = $requested_by;
+            $mUser->request_by = $request_by;
             $mUser->invitation_cd = Str::random(5);
             $mUser->save();
 
-            $requested_by = $mUser->id;
-
-            if ($i > 20)
-                break;
+            $request_by = $mUser->id;
         }
     }
 }

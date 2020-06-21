@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->date('birth_dt')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('requested_by')->nullable();
+            $table->foreignId('request_by')->nullable();
             $table->tinyInteger('is_complete')->default(0);
             $table->string('invitation_cd', 255)->unique()->nullable();
             $table->rememberToken();
