@@ -24,7 +24,7 @@ class UsertreeSeeder extends Seeder
 
 
         foreach ($mUsers as $i => $mUser){
-            $this->generateUsertree($mUser->id, $mUser->request_by);
+            $this->generateUsertree($mUser->id);
         }
     }
 }

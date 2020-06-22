@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const USER_REQUEST_LIMIT = 8;
+
     /**
      * The attributes that are mass assignable.
      *

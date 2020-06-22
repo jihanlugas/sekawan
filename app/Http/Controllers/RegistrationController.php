@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 //use App\Usertree;
+use App\Usertree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +45,22 @@ class RegistrationController extends Controller
     }
 
     public function postinvitation(Request $request){
-        return redirect()->route('invitation')->with('alert-danger', 'Invitation Code Not Valid!');
+        $mUser = User::where('id', Auth::user()->id)->first();
+        $mUserinvitation = User::where('invitation_cd', $request->invitation_cd)->first();
+
+        if ($mUser && $mUserinvitation){
+            $mUserrequestlimit = User::where('request_by', $mUserinvitation->id)->get();
+            if (count($mUserrequestlimit) < User::USER_REQUEST_LIMIT){
+                $mUser->request_by = $mUserinvitation->id;
+                $mUser->save();
+                $this->generateUsertree($mUser->id);
+                return redirect()->route('upload')->with('alert-success', 'Berhasil Menambahkan Invitation Code!');
+            }else{
+                return redirect()->route('invitation')->with('alert-danger', 'Sorry, Invitaion Code Has Reached Limit');
+            }
+        }else{
+            return redirect()->route('invitation')->with('alert-danger', 'Sorry, Invitation Code Not Valid!');
+        }
 //        $mUserinvitation = User::where('invitation_cd', $request->invitation_cd)->first();
 //        $mUser = User::where('id', Auth::user()->id)->first();
 //        if ($mUserinvitation){
