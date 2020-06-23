@@ -5,35 +5,48 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Invitation</div>
+                    <div class="card-header">Upload Bukti</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('invitation') }}">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('upload') }}"
+                              enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group row">
-                                <label for="email" class="col-md-12 col-form-label">{{ __('Invitation Code') }}</label>
+                            @if($mUsertrees)
+                                @foreach($mUsertrees as $i => $mUsertree)
 
-                                <div class="col-md-12">
-                                    <input id="invitation_cd" type="text"
-                                           class="form-control @error('invitation_cd') is-invalid @enderror"
-                                           name="invitation_cd" value="{{ old('invitation_cd') }}" required
-                                           autocomplete="email" autofocus>
+                                    @if(!$mUsertree->photo_id)
+                                        <div class="form-group">
+                                            <label>{{ $mUsertree->user->name }}</label>
+                                            <input type="file"
+                                                   class="form-control-file @error('photo_id') is-invalid @enderror"
+                                                   name="photo_id[{{ $mUsertree->parent_id }}]"
+                                                   value="{{ old('invitation_code') }}">
+                                            @error('photo_id')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                            @enderror
+                                        </div>
+                                    @else
+                                        <div class="form-group">
+                                            <label>{{ $mUsertree->user->name }}</label>
+                                            <label>{{ 'Done' }}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @else
 
-                                    @error('invitation_cd')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            @endif
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-12 text-right">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Save') }}
-                                    </button>
-                                </div>
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>

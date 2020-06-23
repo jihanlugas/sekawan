@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 use App\Http\Traits\UsertreeTrait;
+use App\Http\Traits\PhotouploadTrait;
 
 
 class RegistrationController extends Controller
@@ -21,6 +22,7 @@ class RegistrationController extends Controller
      */
 
     use UsertreeTrait;
+    use PhotouploadTrait;
 
 
     public function __construct()
@@ -61,55 +63,28 @@ class RegistrationController extends Controller
         }else{
             return redirect()->route('invitation')->with('alert-danger', 'Sorry, Invitation Code Not Valid!');
         }
-//        $mUserinvitation = User::where('invitation_cd', $request->invitation_cd)->first();
-//        $mUser = User::where('id', Auth::user()->id)->first();
-//        if ($mUserinvitation){
-////            $mUsertrees = Usertree::where('user_id', $mUserinvitation->id)
-////                ->where('is_admin', '!=', 1)
-////                ->where('parent_level', '!=', 2)
-////                ->get();
-////
-////            if ($mUsertrees){
-////
-////                // Admin Lv 1
-////                Usertree::create([
-////                    'user_id' => $mUser->id,
-////                    'parent_id' => 1,
-////                    'parent_level' => 1,
-////                    'is_admin' => 1,
-////                    'confirmation_status' => 0,
-////                ]);
-////
-////                // Atas dari user yang invite
-////                foreach ($mUsertrees as $mUsertree){
-////                    Usertree::create([
-////                        'user_id' => $mUser->id,
-////                        'parent_id' => $mUsertree->parent_id,
-////                        'parent_level' => $mUsertree->parent_level - 1,
-////                        'confirmation_status' => 0,
-////                    ]);
-////                }
-////
-////                // User Yg Invite Lv 5
-////                Usertree::create([
-////                    'user_id' => $mUser->id,
-////                    'parent_id' => $mUserinvitation->id,
-////                    'parent_level' => 5,
-////                    'confirmation_status' => 0,
-////                ]);
-////            }
-//
-//
-//            $mUser->request_by = $mUserinvitation->id;
-//            $mUser->save();
-//            return redirect()->route('completeregistration.upload')->with('alert-success', 'Berhasil Menambahkan Invitation Code!');
-//        }else{
-//            return redirect()->route('completeregistration.requested')->with('alert-danger', 'Invitation Code Not Valid!');
-//        }
     }
 
     public function upload(){
-        die('upload');
+        $mUsertrees = Usertree::with('user')->where('user_id', Auth::user()->id)->get();
+
+        return view('registration.upload', ['mUsertrees' => $mUsertrees]);
+    }
+
+    public function postupload(Request $request){
+        if ($request->photo_id){
+            foreach ($request->photo_id as $i => $data){
+                $mUsertree = Usertree::where('parent_id', $i)
+                    ->where('user_id', Auth::user()->id)->first();
+                $photo_id = ($this->uploadPhoto($data));
+
+                $mUsertree->photo_id = $photo_id;
+                $mUsertree->save();
+            }
+            die('aye');
+        }else{
+            return redirect()->route('completeregistration.upload');
+        }
     }
 
     public function debug(){
