@@ -12,8 +12,15 @@ class Usertree extends Model
     const ADMIN_LEVEL = 0;
     const USERTREE_LEVEL_LIMIT = 4;
 
+    public $photo;
+
     public function user()
     {
         return $this->belongsTo('App\User', 'parent_id', 'id');
+    }
+
+    public function photoupload()
+    {
+        return $this->belongsTo('App\Photoupload', 'photo_id', 'id');
     }
 }

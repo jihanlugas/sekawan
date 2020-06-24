@@ -38,6 +38,9 @@
                                         <div class="form-group">
                                             <label>{{ $mUsertree->user->name }}</label>
                                             <label>{{ 'Done' }}</label>
+                                            <div class="" style="width: 100%; max-width: 250px">
+                                                <img src="{{ asset($mUsertree->photo) }}" alt="" width="100%" height="auto">
+                                            </div>
                                         </div>
                                     @endif
                                 @endforeach

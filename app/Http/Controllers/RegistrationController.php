@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-//use App\Usertree;
 use App\Usertree;
+use App\Photoupload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,7 +66,10 @@ class RegistrationController extends Controller
     }
 
     public function upload(){
-        $mUsertrees = Usertree::with('user')->where('user_id', Auth::user()->id)->get();
+        $mUsertrees = Usertree::with(['user', 'photoupload'])->where('user_id', Auth::user()->id)->get();
+        foreach ($mUsertrees as $i => $mUsertree){
+            $mUsertrees[$i]->photo = Photoupload::getFilepath($mUsertree->photo_id);
+        }
 
         return view('registration.upload', ['mUsertrees' => $mUsertrees]);
     }
@@ -76,14 +79,14 @@ class RegistrationController extends Controller
             foreach ($request->photo_id as $i => $data){
                 $mUsertree = Usertree::where('parent_id', $i)
                     ->where('user_id', Auth::user()->id)->first();
-                $photo_id = ($this->uploadPhoto($data));
+                $photo_id = ($this->uploadPhoto($data, $mUsertree->id));
 
                 $mUsertree->photo_id = $photo_id;
                 $mUsertree->save();
             }
-            die('aye');
+            return redirect()->route('upload');
         }else{
-            return redirect()->route('completeregistration.upload');
+            return redirect()->route('upload');
         }
     }
 
