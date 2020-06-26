@@ -24,10 +24,14 @@
                                     @if(!$mUsertree->photo_id)
                                         <div class="form-group">
                                             <label>{{ $mUsertree->user->name }}</label>
-                                            <input type="file"
-                                                   class="form-control-file @error('photo_id') is-invalid @enderror"
-                                                   name="photo_id[{{ $mUsertree->parent_id }}]"
-                                                   value="{{ old('invitation_code') }}">
+{{--                                            <input type="file"--}}
+{{--                                                   class="form-control-file @error('photo_id') is-invalid @enderror"--}}
+{{--                                                   name="photo_id[{{ $mUsertree->parent_id }}]"--}}
+{{--                                                   value="{{ old('invitation_code') }}">--}}
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input @error('photo_id') is-invalid @enderror" name="photo_id[{{ $mUsertree->parent_id }}]">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
                                             @error('photo_id')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -37,10 +41,10 @@
                                     @else
                                         <div class="form-group">
                                             <label>{{ $mUsertree->user->name }}</label>
-                                            <label>{{ 'Done' }}</label>
                                             <div class="" style="width: 100%; max-width: 250px">
                                                 <img src="{{ asset($mUsertree->photo) }}" alt="" width="100%" height="auto">
                                             </div>
+                                            <label>{{ 'Done' }}</label>
                                         </div>
                                     @endif
                                 @endforeach

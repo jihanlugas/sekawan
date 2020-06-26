@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 
 use App\Http\Traits\UsertreeTrait;
-use App\Http\Traits\PhotouploadTrait;
+use Illuminate\Support\Facades\DB;
+use Throwable;
+
+//use App\Http\Traits\PhotouploadTrait;
 
 
 class RegistrationController extends Controller
@@ -22,7 +25,7 @@ class RegistrationController extends Controller
      */
 
     use UsertreeTrait;
-    use PhotouploadTrait;
+//    use PhotouploadTrait;
 
 
     public function __construct()
@@ -53,10 +56,19 @@ class RegistrationController extends Controller
         if ($mUser && $mUserinvitation){
             $mUserrequestlimit = User::where('request_by', $mUserinvitation->id)->get();
             if (count($mUserrequestlimit) < User::USER_REQUEST_LIMIT){
-                $mUser->request_by = $mUserinvitation->id;
-                $mUser->save();
-                $this->generateUsertree($mUser->id);
-                return redirect()->route('upload')->with('alert-success', 'Berhasil Menambahkan Invitation Code!');
+                DB::beginTransaction();
+                try {
+                    $mUser->request_by = $mUserinvitation->id;
+                    $mUser->save();
+                    $this->generateUsertree($mUser->id);
+
+                    DB::commit();
+                    return redirect()->route('upload')->with('alert-success', 'Berhasil Menambahkan Invitation Code!');
+                }catch (Throwable $e){
+                    DB::rollBack();
+                    dd($e);
+//                    return redirect()->route('invitation')->with('alert-danger', 'Sorry, Somehing Going Wrong');
+                }
             }else{
                 return redirect()->route('invitation')->with('alert-danger', 'Sorry, Invitaion Code Has Reached Limit');
             }
@@ -76,15 +88,24 @@ class RegistrationController extends Controller
 
     public function postupload(Request $request){
         if ($request->photo_id){
-            foreach ($request->photo_id as $i => $data){
-                $mUsertree = Usertree::where('parent_id', $i)
-                    ->where('user_id', Auth::user()->id)->first();
-                $photo_id = ($this->uploadPhoto($data, $mUsertree->id));
+            DB::beginTransaction();
+            try {
+                foreach ($request->photo_id as $i => $data){
+                    $mUsertree = Usertree::where('parent_id', $i)
+                        ->where('user_id', Auth::user()->id)->first();
+                    $photo_id = Photoupload::uploadPhoto($data, $mUsertree->id);
 
-                $mUsertree->photo_id = $photo_id;
-                $mUsertree->save();
+                    $mUsertree->photo_id = $photo_id;
+                    $mUsertree->save();
+                }
+
+                DB::commit();
+                return redirect()->route('upload');
+            }catch (Throwable $e){
+                DB::rollBack();
+                dd($e);
+//                return redirect()->route('upload');
             }
-            return redirect()->route('upload');
         }else{
             return redirect()->route('upload');
         }
