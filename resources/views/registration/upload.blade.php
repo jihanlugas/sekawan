@@ -13,52 +13,70 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        <form method="POST" action="{{ route('upload') }}"
-                              enctype="multipart/form-data">
-                            @csrf
-
+                        <div class="usertrees row">
                             @if($mUsertrees)
                                 @foreach($mUsertrees as $i => $mUsertree)
-
-                                    @if(!$mUsertree->photo_id)
-                                        <div class="form-group">
-                                            <label>{{ $mUsertree->user->name }}</label>
-{{--                                            <input type="file"--}}
-{{--                                                   class="form-control-file @error('photo_id') is-invalid @enderror"--}}
-{{--                                                   name="photo_id[{{ $mUsertree->parent_id }}]"--}}
-{{--                                                   value="{{ old('invitation_code') }}">--}}
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input @error('photo_id') is-invalid @enderror" name="photo_id[{{ $mUsertree->parent_id }}]">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <form method="POST" action="{{ route('upload') }}"  class="col-md-6 col-sm-12" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="card mb-4 usertreeCard"  style="width: 100%">
+                                            @if(!$mUsertree->photo_id)
+                                                <img class="card-img-top btnInputimage" src="{{ asset('img/default-photo.jpg') }}"
+                                                     alt="Card image cap">
+                                                <input type="file" class="d-none inputImage" name="photo_id">
+                                                <input type="text" class="d-none" name="parent_id" value="{{ $mUsertree->parent_id }}">
+                                            @else
+                                                <img class="card-img-top" src="{{ asset($mUsertree->photo) }}"
+                                                     alt="Card image cap">
+                                            @endif
+                                            <div class="card-body">
+                                                <h5 class="card-title"><label>Status
+                                                        : {{ \App\Usertree::$status_photo[$mUsertree->status_photo] }}</label>
+                                                </h5>
+                                                <p class="card-text">{{ $mUsertree->user->name }}</p>
+                                                {{--                                                <a href="#" class="btn btn-primary">Go somewhere</a>--}}
                                             </div>
-                                            @error('photo_id')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                            @enderror
                                         </div>
-                                    @else
-                                        <div class="form-group">
-                                            <label>{{ $mUsertree->user->name }}</label>
-                                            <div class="" style="width: 100%; max-width: 250px">
-                                                <img src="{{ asset($mUsertree->photo) }}" alt="" width="100%" height="auto">
-                                            </div>
-                                            <label>{{ 'Done' }}</label>
-                                        </div>
-                                    @endif
+                                    </form>
                                 @endforeach
                             @else
-
-                            @endif
-
-                            <div class="form-group text-right">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            $('.btnInputimage').click(function () {
+                $(this).closest('.usertreeCard').find('input').click();
+            })
+
+            $('.inputImage').change(function () {
+                var form = $(this).closest('#form')[0];
+                var formData = new FormData(form);
+                var url = '{{ route('upload') }}';
+
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(res){
+                        console.log('res' ,res)
+                        // if(response != 0){
+                        //     $("#img").attr("src",response);
+                        //     $(".preview img").show(); // Display image element
+                        // }else{
+                        //     alert('file not uploaded');
+                        // }
+                    },
+                });
+            })
+        })
+    </script>
+@endpush
