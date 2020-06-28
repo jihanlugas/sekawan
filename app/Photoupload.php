@@ -20,7 +20,7 @@ class Photoupload extends Model
     public static function getFilepath($id){
         $mPhotoupload = Photoupload::where('id', $id)->first();
         if (!empty($mPhotoupload)){
-            return '/' . self::FILE_DIRECTORY . '/' . $mPhotoupload->file_name;
+            return asset('/' . self::FILE_DIRECTORY . '/' . $mPhotoupload->file_name);
         }else{
             return false;
         }

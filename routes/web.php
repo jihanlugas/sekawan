@@ -26,6 +26,7 @@ Route::get('/invitation', 'RegistrationController@invitation')->name('invitation
 Route::post('/invitation', 'RegistrationController@postinvitation');
 Route::get('/upload', 'RegistrationController@upload')->name('upload');
 Route::post('/upload', 'RegistrationController@postupload');
+Route::get('/completeregistration', 'RegistrationController@completeregistration')->name('completeregistration');
 
 Route::get('/debug', 'RegistrationController@debug')->name('debug');
 

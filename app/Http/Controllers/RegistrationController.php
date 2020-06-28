@@ -79,39 +79,19 @@ class RegistrationController extends Controller
 
     public function upload(){
         $mUsertrees = Usertree::with(['user', 'photoupload'])->where('user_id', Auth::user()->id)->get();
+        $complete = true;
         foreach ($mUsertrees as $i => $mUsertree){
-            $mUsertrees[$i]->status_photo = Usertree::STATUS_PHOTO_WAITING;
+            if ($complete || !(($mUsertrees[$i]->status_photo != Usertree::STATUS_PHOTO_APPROVED) || ($mUsertrees[$i]->status_photo != Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED))){
+                $complete = false;
+            }
+            $mUsertrees[$i]->status_photo = Usertree::$status_photo[$mUsertrees[$i]->status_photo];
             $mUsertrees[$i]->photo = Photoupload::getFilepath($mUsertree->photo_id);
         }
 
-        return view('registration.upload', ['mUsertrees' => $mUsertrees]);
+        return view('registration.upload', ['mUsertrees' => $mUsertrees, 'complete' => $complete]);
     }
 
     public function postupload(Request $request){
-//        dd($request);
-//        if ($request->photo_id){
-//            DB::beginTransaction();
-//            try {
-//                foreach ($request->photo_id as $i => $data){
-//                    $mUsertree = Usertree::where('parent_id', $i)
-//                        ->where('user_id', Auth::user()->id)->first();
-//                    $photo_id = Photoupload::uploadPhoto($data, $mUsertree->id);
-//
-//                    $mUsertree->photo_id = $photo_id;
-//                    $mUsertree->save();
-//                }
-//
-//                DB::commit();
-//                return redirect()->route('upload');
-//            }catch (Throwable $e){
-//                DB::rollBack();
-//                dd($e);
-////                return redirect()->route('upload');
-//            }
-//        }else{
-//            return redirect()->route('upload');
-//        }
-
         $vResult['status'] = false;
         $vResult['message'] = 'Somethink Wrong Plese Try Again';
 
@@ -120,32 +100,37 @@ class RegistrationController extends Controller
             try {
                 $mUsertree = Usertree::where('parent_id', $request->parent_id)
                     ->where('user_id', Auth::user()->id)->first();
-                $photo_id = Photoupload::uploadPhoto($request, $mUsertree->id);
+                $photo_id = Photoupload::uploadPhoto($request->photo_id, $mUsertree->id);
 
                 $mUsertree->photo_id = $photo_id;
+                $mUsertree->status_photo = Usertree::STATUS_PHOTO_WAITING;
                 $mUsertree->save();
+
+                $data = Usertree::with(['user', 'photoupload'])->where('id', $mUsertree->id)->first();
+                $data['photo'] = Photoupload::getFilepath($data->photo_id);
+                $data['status_photo'] = Usertree::$status_photo[$data->status_photo];
+
                 $vResult['status'] = true;
                 $vResult['message'] = 'Success';
+                $vResult['data'] = $data;
                 DB::commit();
-                return redirect()->route('upload');
             } catch (Throwable $e) {
                 DB::rollBack();
                 dd($e);
-//                return redirect()->route('upload');
             }
         }
 
-        echo json_encode($vResult);
+        return response()->json($vResult);
     }
 
     public function debug(){
-        $mUsers = User::where('request_by', '!=', '1')
-            ->where('request_by', '!=', 'NULL')
-            ->get();
-
-
-        foreach ($mUsers as $i => $mUser){
-            $this->generateUsertree($mUser->id, $mUser->request_by);
-        }
+//        $mUsers = User::where('request_by', '!=', '1')
+//            ->where('request_by', '!=', 'NULL')
+//            ->get();
+//
+//
+//        foreach ($mUsers as $i => $mUser){
+//            $this->generateUsertree($mUser->id, $mUser->request_by);
+//        }
     }
 }

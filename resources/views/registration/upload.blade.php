@@ -16,30 +16,36 @@
                         <div class="usertrees row">
                             @if($mUsertrees)
                                 @foreach($mUsertrees as $i => $mUsertree)
-                                    <form method="POST" action="{{ route('upload') }}"  class="col-md-6 col-sm-12" enctype="multipart/form-data">
+                                    <form method="POST" action="{{ route('upload') }}"
+                                          id="form-{{ $mUsertree->parent_id }}" class="col-md-6 col-sm-12"
+                                          enctype="multipart/form-data">
                                         @csrf
-                                        <div class="card mb-4 usertreeCard"  style="width: 100%">
-                                            @if(!$mUsertree->photo_id)
-                                                <img class="card-img-top btnInputimage" src="{{ asset('img/default-photo.jpg') }}"
-                                                     alt="Card image cap">
-                                                <input type="file" class="d-none inputImage" name="photo_id">
-                                                <input type="text" class="d-none" name="parent_id" value="{{ $mUsertree->parent_id }}">
-                                            @else
-                                                <img class="card-img-top" src="{{ asset($mUsertree->photo) }}"
-                                                     alt="Card image cap">
-                                            @endif
+                                        <div class="card mb-4 usertreeCard" style="width: 100%">
+                                            <img
+                                                class="card-img-top usertreeImage {{ $mUsertree->photo ? '' : 'btnInputimage' }} "
+                                                src="{{ $mUsertree->photo ? $mUsertree->photo : asset('img/default-photo.jpg') }}"
+                                                alt="Card image cap">
+                                            <input type="file" class="d-none inputImage" name="photo_id"
+                                                   data-parentid="{{ $mUsertree->parent_id }}">
+                                            <input type="text" class="d-none" name="parent_id"
+                                                   value="{{ $mUsertree->parent_id }}">
                                             <div class="card-body">
-                                                <h5 class="card-title"><label>Status
-                                                        : {{ \App\Usertree::$status_photo[$mUsertree->status_photo] }}</label>
-                                                </h5>
+                                                <h5 class="card-title usertreeStatus"><label>Status
+                                                        : {{ $mUsertree->status_photo }}</label></h5>
                                                 <p class="card-text">{{ $mUsertree->user->name }}</p>
-                                                {{--                                                <a href="#" class="btn btn-primary">Go somewhere</a>--}}
                                             </div>
                                         </div>
                                     </form>
                                 @endforeach
                             @else
+                            @endif
                         </div>
+                        @if($complete)
+                            <div class="row">
+                                <div class="col text-right">
+                                    <a href="{{ route('completeregistration') }}" class="btn btn-primary">Complete</a>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -56,23 +62,27 @@
             })
 
             $('.inputImage').change(function () {
-                var form = $(this).closest('#form')[0];
+                var jThis = $(this);
+                var form = jThis.closest('#form-' + $(this).data('parentid'))[0];
                 var formData = new FormData(form);
                 var url = '{{ route('upload') }}';
 
                 $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     url: url,
                     type: 'post',
                     data: formData,
                     contentType: false,
                     processData: false,
-                    success: function(res){
-                        console.log('res' ,res)
-                        // if(response != 0){
-                        //     $("#img").attr("src",response);
-                        //     $(".preview img").show(); // Display image element
+                    success: function (res) {
+                        console.log(res)
+                        // if(res.status){
+                        console.log('res.status', res.status)
+                        console.log('res.data', res.data)
+                        jThis.closest('form').find('.usertreeImage').attr('src', res.data.photo);
+                        jThis.closest('form').find('.usertreeStatus').text(res.data.status_photo);
                         // }else{
-                        //     alert('file not uploaded');
+
                         // }
                     },
                 });
