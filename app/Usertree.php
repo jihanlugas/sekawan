@@ -11,7 +11,7 @@ class Usertree extends Model
     const ADMIN_ID = 1;
     const ADMIN_LEVEL = 0;
     const USERTREE_LEVEL_LIMIT = 4;
-    const LIMIT_WAITING_DAY = 3; // 3 Hari
+    const LIMIT_WAITING_DAY = 3; // 3 Day
 
     const STATUS_PHOTO_NO_DATA = 0;
     const STATUS_PHOTO_WAITING = 10;

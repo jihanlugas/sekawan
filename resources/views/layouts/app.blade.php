@@ -80,6 +80,10 @@
         @yield('content')
     </main>
     @stack('script')
+    <script>
+        // $(document).ready(function () {
+        // })
+    </script>
 </div>
 </body>
 </html>

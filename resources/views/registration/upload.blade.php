@@ -43,7 +43,7 @@
                         @if($complete)
                             <div class="row">
                                 <div class="col text-right">
-                                    <a href="{{ route('completeregistration') }}" class="btn btn-primary">Complete</a>
+                                    <a href="{{ route('completedata') }}" class="btn btn-primary">Complete Data</a>
                                 </div>
                             </div>
                         @endif
@@ -75,15 +75,12 @@
                     contentType: false,
                     processData: false,
                     success: function (res) {
-                        console.log(res)
-                        // if(res.status){
-                        console.log('res.status', res.status)
-                        console.log('res.data', res.data)
-                        jThis.closest('form').find('.usertreeImage').attr('src', res.data.photo);
-                        jThis.closest('form').find('.usertreeStatus').text(res.data.status_photo);
-                        // }else{
+                        if (res.status) {
+                            jThis.closest('form').find('.usertreeImage').attr('src', res.data.photo);
+                            jThis.closest('form').find('.usertreeStatus').text(res.data.status_photo);
+                        } else {
 
-                        // }
+                        }
                     },
                 });
             })
