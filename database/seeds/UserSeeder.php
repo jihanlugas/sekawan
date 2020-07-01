@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Userdetail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -237,12 +238,22 @@ class UserSeeder extends Seeder
             $mUser->name = $user['name'];
             $mUser->email = strtolower(str_replace(' ', '', $user['name'] . '@gmail.com'));
             $mUser->birth_dt = $user['birth_dt'];
+            $mUser->is_complete = '1';
             $mUser->password = Hash::make('123456');
             $mUser->request_by = $request_by;
             $mUser->invitation_cd = Str::random(5);
             $mUser->save();
 
             $request_by = $mUser->id;
+        }
+
+        $mUsers = User::all();
+        foreach ($mUsers as $mUser){
+            $mUserdetail = new Userdetail();
+            $mUserdetail->user_id = $mUser->id;
+            $mUserdetail->bank_id = rand(1, 10);
+            $mUserdetail->bank_account_number = rand(1000000000, 9999999999);
+            $mUserdetail->save();
         }
     }
 }

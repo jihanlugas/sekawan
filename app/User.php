@@ -40,8 +40,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function usertree()
+//    public function usertree()
+//    {
+//        return $this->hasMany('App\Usertree');
+//    }
+
+    public function userdetail()
     {
-        return $this->hasMany('App\Usertree');
+        return $this->hasOne('App\Userdetail');
     }
 }

@@ -32,7 +32,9 @@
                                             <div class="card-body">
                                                 <h5 class="card-title usertreeStatus"><label>Status
                                                         : {{ $mUsertree->status_photo }}</label></h5>
-                                                <p class="card-text">{{ $mUsertree->user->name }}</p>
+                                                <p class="card-text">{{ 'Name : ' . $mUsertree->parent->name }}</p>
+                                                <p class="card-text">{{ 'Bank : ' . $mUsertree->parent->userdetail->bank->name }}</p>
+                                                <p class="card-text">{{ 'No. Rekening : ' . $mUsertree->parent->userdetail->bank_account_number }}</p>
                                             </div>
                                         </div>
                                     </form>

@@ -12,10 +12,10 @@ class Photoupload extends Model
 
     const FILE_DIRECTORY = 'uploads';
 
-    public function usertree()
-    {
-        return $this->hasOne('App\Usertree');
-    }
+//    public function usertree()
+//    {
+//        return $this->hasOne('App\Usertree');
+//    }
 
     public static function getFilepath($id){
         $mPhotoupload = Photoupload::where('id', $id)->first();
