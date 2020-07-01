@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Userdetail;
 use App\Usertree;
 use App\Photoupload;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Traits\UsertreeTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Throwable;
 
 //use App\Http\Traits\PhotouploadTrait;
@@ -27,8 +29,15 @@ class RegistrationController extends Controller
 
     use UsertreeTrait;
 
-//    use PhotouploadTrait;
-
+    protected function completedatavalidator(array $data)
+    {
+        return Validator::make($data, [
+            'bank_id' => ['required', 'numeric'],
+            'bank_account_number' => ['required', 'string', 'min:5'],
+            'bank_account_name' => ['required', 'string'],
+            'birth_dt' => ['required', 'date'],
+        ]);
+    }
 
     public function __construct()
     {
@@ -38,14 +47,13 @@ class RegistrationController extends Controller
 
     public function registration()
     {
-//        dd(Auth::user());
         if (!Auth::user()->request_by) {
             return redirect(route('invitation'));
         }
 
-        $mUsertrees = Usertree::with(['user', 'photoupload'])
+        $mUsertrees = Usertree::with(['parent', 'photoupload'])
             ->where('user_id', Auth::user()->id)
-            ->where('status_photo' , '!=', Usertree::STATUS_PHOTO_APPROVED)
+            ->where('status_photo', '!=', Usertree::STATUS_PHOTO_APPROVED)
             ->where('status_photo', '!=', Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED)
             ->get();
 
@@ -99,13 +107,12 @@ class RegistrationController extends Controller
         $complete = true;
         $now = new \DateTime();
         foreach ($mUsertrees as $i => $mUsertree) {
-            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addDay(Usertree::LIMIT_WAITING_DAY) <= Carbon::now())){
+            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addDay(Usertree::LIMIT_WAITING_DAY) <= Carbon::now())) {
                 $mUsertrees[$i]->status_photo = Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED;
                 $mUsertrees[$i]->save();
             }
 
-            if (!$complete || !(($mUsertrees[$i]->status_photo != Usertree::STATUS_PHOTO_APPROVED) || ($mUsertrees[$i]->status_photo != Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED))) {
-                echo $i;
+            if (!(($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_APPROVED) || ($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED))) {
                 $complete = false;
             }
 
@@ -151,8 +158,37 @@ class RegistrationController extends Controller
 
     public function completedata()
     {
-        $mUser = User::where('id', Auth::user()->id)->first();
+        $mUser = User::with(['userdetail'])->where('id', Auth::user()->id)->first();
         return view('registration.completedata', ['mUser' => $mUser]);
+    }
+
+    public function postcompletedata(Request $request)
+    {
+        $mUser = User::where('id', Auth::user()->id)->first();
+        $mUserdetail = Userdetail::where('user_id', Auth::user()->id)->first();
+        if (!$mUserdetail) {
+            $mUserdetail = new Userdetail();
+            $mUserdetail->user_id = $mUser->id;
+        }
+
+        $validate = $this->completedatavalidator($request->all())->validate();
+
+        DB::beginTransaction();
+        try {
+            $mUserdetail->bank_id = $request->bank_id;
+            $mUserdetail->bank_account_number = $request->bank_account_number;
+            $mUserdetail->bank_account_name = $request->bank_account_name;
+            $mUserdetail->birth_dt = $request->birth_dt;
+            $mUserdetail->save();
+            DB::commit();
+
+            die('Aye');
+
+            } catch (Throwable $e) {
+            DB::rollBack();
+            dd($e);
+        }
+
     }
 
     public function debug()

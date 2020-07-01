@@ -17,6 +17,8 @@ class CreateUserdetailsTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('bank_id');
             $table->string('bank_account_number');
+            $table->string('bank_account_name');
+            $table->date('birth_dt')->nullable();
             $table->timestamps();
 
             $table->primary('user_id');

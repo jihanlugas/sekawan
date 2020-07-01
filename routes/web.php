@@ -28,6 +28,7 @@ Route::get('/upload', 'RegistrationController@upload')->name('upload');
 Route::post('/upload', 'RegistrationController@postupload');
 
 Route::get('/completedata', 'RegistrationController@completedata')->name('completedata');
+Route::post('/completedata', 'RegistrationController@postcompletedata');
 
 
 

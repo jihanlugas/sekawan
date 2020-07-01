@@ -61,20 +61,6 @@
                             </div>
                         </div>
 
-{{--                        <div class="form-group row">--}}
-{{--                            <label for="birth_dt" class="col-md-12 col-form-label">{{ __('Date of Birth') }}</label>--}}
-
-{{--                            <div class="col-md-12">--}}
-{{--                                <input id="birth_dt" type="date" class="form-control @error('birth_dt') is-invalid @enderror" name="birth_dt" value="{{ old('birth_dt') }}" required>--}}
-
-{{--                                @error('birth_dt')--}}
-{{--                                <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
                         <div class="form-group row mb-0">
                             <div class="col-md-12 text-md-right">
                                 <button type="submit" class="btn btn-primary">
