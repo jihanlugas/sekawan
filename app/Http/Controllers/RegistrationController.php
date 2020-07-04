@@ -171,7 +171,7 @@ class RegistrationController extends Controller
             $mUserdetail->user_id = $mUser->id;
         }
 
-        $validate = $this->completedatavalidator($request->all())->validate();
+        $this->completedatavalidator($request->all())->validate();
 
         DB::beginTransaction();
         try {
@@ -180,9 +180,14 @@ class RegistrationController extends Controller
             $mUserdetail->bank_account_name = $request->bank_account_name;
             $mUserdetail->birth_dt = $request->birth_dt;
             $mUserdetail->save();
+
+            $mUser->invitation_cd = $mUser->generateInvitationcd();
+            $mUser->is_complete = 1;
+            $mUser->save();
+
             DB::commit();
 
-            die('Aye');
+            return redirect(route('successcompletedata'));
 
             } catch (Throwable $e) {
             DB::rollBack();

@@ -38,12 +38,15 @@ class Usertree extends Model
     public function parent()
     {
         return $this->belongsTo('App\User', 'parent_id', 'id');
-//        return $this->hasOne('App\User', 'id', 'parent_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function photoupload()
     {
         return $this->belongsTo('App\User', 'photo_id', 'id');
-//        return $this->hasOne('App\Photoupload', 'id', 'photo_id');
     }
 }

@@ -10933,3 +10933,49 @@ a.text-dark:focus {
   background-image: none;
 }
 
+/** Ignore start */
+
+/** Ignore end */
+
+/**
+Accordion item style
+*/
+
+.accordion-item {
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 20px 20px;
+  box-shadow: 0px 16px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.accordion-item__title {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.accordion-item__arrow {
+  fill: #b721ff;
+}
+
+.accordion-item__content {
+  display: none;
+  overflow: hidden;
+}
+
+.entry {
+  line-height: 1.74;
+}
+
+.entry p:last-of-type,
+.entry p:last-child {
+  margin-bottom: 0;
+}
+

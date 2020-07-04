@@ -11,7 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -19,12 +20,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-{{--    <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}">--}}
+    {{--    <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}">--}}
 
-{{--    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">--}}
-{{--    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">--}}
-{{--    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">--}}
-{{--    <link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}">--}}
+    {{--    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">--}}
+    {{--    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">--}}
+    {{--    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">--}}
+    {{--    <link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}">--}}
 
 </head>
 <body>
@@ -59,25 +60,53 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                        @if(Auth::user()->is_complete)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('request') }}">{{ __('Request') }}</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endif
+
                     @endguest
                 </ul>
             </div>
@@ -87,6 +116,7 @@
     <main class="py-4">
         @yield('content')
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js" integrity="sha512-3WGIRFCuTpZhqYujwLp5RtARPkOy3uRtc3RXB31bJ9/i6VH2C66Z0WBV6gHhdhbUIDKFx8yTkLfEjdQM5Wl+ZQ==" crossorigin="anonymous"></script>
     @stack('script')
     <script>
         // $(document).ready(function () {
