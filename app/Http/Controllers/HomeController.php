@@ -6,6 +6,7 @@ use App\User;
 use App\Usertree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends AuthController
 {
@@ -30,9 +31,13 @@ class HomeController extends AuthController
     public function request()
     {
         $mUser = User::where('id', Auth::user()->id)->first();
-        $mUsertrees = Usertree::with(['user', 'photoupload'])
-            ->where('parent_id', 15)
-            ->orderBy('parent_level', 'ASC')->get();
+        for ($level = 1; $level <= Usertree::USERTREE_LEVEL_LIMIT; $level++){
+            $mUsertrees[$level] = Usertree::with(['user', 'photoupload'])
+                ->where('parent_id', 15)
+                ->where('parent_level', $level)
+                ->orderBy('parent_level', 'ASC')->get();
+        }
+
 
 //        dd($mUsertrees);
 
