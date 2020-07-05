@@ -34,6 +34,7 @@ Route::get('/debug', 'RegistrationController@debug')->name('debug');
 Route::get('/successcompletedata', 'HomeController@successcompletedata')->name('successcompletedata');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/request', 'HomeController@request')->name('request');
+Route::post('/request', 'HomeController@postrequest');
 
 
 
