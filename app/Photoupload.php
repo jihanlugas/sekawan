@@ -28,7 +28,7 @@ class Photoupload extends Model
         }
     }
 
-    public static function uploadPhoto($request, $ref_id, $ref_type = 0)
+    public static function uploadPhoto($request, $ref_id, $ref_type, $file_name)
     {
         $mUploadinc = Uploadinc::getUploadinctoupload($ref_type);
         Uploadinc::runningInc($ref_type);
@@ -37,8 +37,8 @@ class Photoupload extends Model
         $data->ref_type = $ref_type;
         $data->ref_id = $ref_id;
         $data->folder_name = $mUploadinc->folder_name;
-        $data->file_name = str_replace(' ', '-', $request->getClientOriginalName());
-        $data->alt_file = $request->getClientOriginalName();
+        $data->alt_file = $file_name;
+        $data->file_name = str_replace(' ', '-', $data->alt_file);
         $data->ext_file = $request->getClientOriginalExtension();
         $data->file_path = $data->folder_name . '/' . $data->file_name;
         $data->size = $request->getSize();

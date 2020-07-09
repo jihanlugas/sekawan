@@ -21,6 +21,7 @@ class CreateUsertreesTable extends Migration
             $table->tinyInteger('is_admin')->default(0);
             $table->foreignId('photo_id')->default(0);
             $table->foreignId('status_photo')->default(0);
+            $table->foreignId('price_id');
             $table->timestamps();
         });
     }

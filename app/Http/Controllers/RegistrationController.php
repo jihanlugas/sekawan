@@ -133,7 +133,8 @@ class RegistrationController extends Controller
             try {
                 $mUsertree = Usertree::where('parent_id', $request->parent_id)
                     ->where('user_id', Auth::user()->id)->first();
-                $photo_id = Photoupload::uploadPhoto($request->photo_id, $mUsertree->id, Photoupload::REF_TYPE_TABLE_USERTREES);
+
+                $photo_id = Photoupload::uploadPhoto($request->photo_id, $mUsertree->id, Photoupload::REF_TYPE_TABLE_USERTREES, $mUsertree->id);
 
                 if ($mUsertree->photo_id)
                     Photoupload::deletePhoto($mUsertree->photo_id);
