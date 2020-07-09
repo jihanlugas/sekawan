@@ -22,7 +22,7 @@
                                         @csrf
                                         <div class="card mb-4 usertreeCard" style="width: 100%">
                                             <img
-                                                class="card-img-top usertreeImage {{ $mUsertree->photo ? '' : 'btnInputimage' }} "
+                                                class="card-img-top usertreeImage btnInputimage"
                                                 src="{{ $mUsertree->photo ? $mUsertree->photo : asset('img/default-photo.jpg') }}"
                                                 alt="Card image cap">
                                             <input type="file" class="d-none inputImage" name="photo_id"

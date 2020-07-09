@@ -17,6 +17,7 @@ class CreatePhotouploadsTable extends Migration
             $table->id();
             $table->foreignId('ref_type');
             $table->foreignId('ref_id');
+            $table->string('file_path');
             $table->string('folder_name');
             $table->string('file_name');
             $table->string('alt_file');
