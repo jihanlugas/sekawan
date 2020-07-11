@@ -85,17 +85,17 @@ class RegistrationController extends Controller
                     $this->generateUsertree($mUser->id);
 
                     DB::commit();
-                    return redirect()->route('upload')->with('alert-success', 'Berhasil Menambahkan Invitation Code!');
+                    return redirect()->route('upload')->with('success', 'Berhasil Menambahkan Invitation Code!');
                 } catch (Throwable $e) {
                     DB::rollBack();
                     dd($e);
-//                    return redirect()->route('invitation')->with('alert-danger', 'Sorry, Somehing Going Wrong');
+//                    return redirect()->route('invitation')->with('danger', 'Sorry, Somehing Going Wrong');
                 }
             } else {
-                return redirect()->route('invitation')->with('alert-danger', 'Sorry, Invitaion Code Has Reached Limit');
+                return redirect()->route('invitation')->with('danger', 'Sorry, Invitaion Code Has Reached Limit');
             }
         } else {
-            return redirect()->route('invitation')->with('alert-danger', 'Sorry, Invitation Code Not Valid!');
+            return redirect()->route('invitation')->with('danger', 'Sorry, Invitation Code Not Valid!');
         }
     }
 

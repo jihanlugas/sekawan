@@ -8,6 +8,7 @@
                     <div class="card-header">Invitation</div>
 
                     <div class="card-body">
+                        @include('layouts.flash')
                         <form method="POST" action="{{ route('invitation') }}">
                             @csrf
 
