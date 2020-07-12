@@ -26402,6 +26402,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 __webpack_require__(/*! ./custom/accordion */ "./resources/js/custom/accordion.js");
 
+__webpack_require__(/*! ./custom/alert */ "./resources/js/custom/alert.js");
+
 /***/ }),
 
 /***/ "./resources/js/custom/accordion.js":
@@ -26541,6 +26543,21 @@ accordionItems.forEach(function (itemAccordion) {
 
 /***/ }),
 
+/***/ "./resources/js/custom/alert.js":
+/*!**************************************!*\
+  !*** ./resources/js/custom/alert.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.setTimeout(function () {
+  $(".alert-hide").fadeTo(500, 0).slideUp(500, function () {
+    $(this).remove();
+  });
+}, 5000);
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -26559,8 +26576,8 @@ accordionItems.forEach(function (itemAccordion) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sekawan\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sekawan\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/sekawan/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/sekawan/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
