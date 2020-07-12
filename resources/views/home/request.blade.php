@@ -56,6 +56,26 @@
                                         </div>
                                     @endif
                                 </div>
+                                <div class="accordion-item__detail">
+                                    <div class="accordion-item__detail-item">
+                                        <div class="accordion-item__detail-item-title">
+                                            Telah Didapat
+                                        </div>
+                                        <div class="accordion-item__detail-item-contain">
+                                            <div class="">Jumlah</div>
+                                            <div class="">1000000</div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item__detail-item">
+                                        <div class="accordion-item__detail-item-title">
+                                            Belum Didapat
+                                        </div>
+                                        <div class="accordion-item__detail-item-contain">
+                                            <div class="">Jumlah</div>
+                                            <div class="">1000000</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>

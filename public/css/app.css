@@ -10970,6 +10970,26 @@ Accordion item style
   overflow: hidden;
 }
 
+.accordion-item__detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item__detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item__detail-item-title {
+  font-size: 16px;
+}
+
+.accordion-item__detail-item-contain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .entry {
   line-height: 1.74;
 }

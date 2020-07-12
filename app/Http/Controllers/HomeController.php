@@ -38,10 +38,34 @@ class HomeController extends AuthController
                 ->where('parent_level', $level)
                 ->orderBy('parent_level', 'ASC')->get();
 
+            $qTotalusertree = DB::selectOne("SELECT sum(prices.non_admin_price) as total
+                                                FROM usertrees
+                                                JOIN prices ON prices.id = usertrees.price_id
+                                                WHERE parent_id = :pid
+                                                AND parent_level = :plv
+                                                AND usertrees.status_photo <= :reject
+                                                AND usertrees.status_photo >= :waiting",
+                                                [
+                                                    'pid' => $mUser->id,
+                                                    'plv' => $level,
+                                                    'reject' => Usertree::STATUS_PHOTO_REJECTTED,
+                                                    'waiting' => Usertree::STATUS_PHOTO_WAITING,
+                                                ]);
+
+
             foreach ($mUsertrees[$level] as $i => $mUsertree){
                 $mUsertrees[$level][$i]->photo = Photoupload::getFilepath($mUsertree->photo_id);
             }
+
+//            if (!empty($qTotalusertree)){
+//                $mUsertrees[$level]['total'] = $qTotalusertree['total'];
+//            }else{
+//                $mUsertrees[$level]['total'] = 0;
+//            }
         }
+
+        dd($mUsertrees);
+
 
         return view('home.request', ['mUser' => $mUser, 'mUsertrees' => $mUsertrees]);
     }
