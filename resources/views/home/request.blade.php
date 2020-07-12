@@ -22,7 +22,7 @@
                                 </h3>
 
                                 <div class="accordion-item__content">
-                                    @if($mUsertree)
+                                    @if(!$mUsertree->isEmpty())
                                         @foreach($mUsertree as $i => $usertree)
                                             <div class="entry p-4">
                                                 <div class="card mb-4 usertreeCard" style="width: 100%">

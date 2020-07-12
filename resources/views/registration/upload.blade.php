@@ -30,11 +30,11 @@
                                             <input type="text" class="d-none" name="parent_id"
                                                    value="{{ $mUsertree->parent_id }}">
                                             <div class="card-body">
-                                                <h5 class="card-title usertreeStatus"><label>Status
-                                                        : {{ $mUsertree->status_photo }}</label></h5>
+                                                <h3 class="card-title usertreeStatus"><?= $mUsertree->status_photo ?></h3>
                                                 <p class="card-text">{{ 'Name : ' . $mUsertree->parent->name }}</p>
                                                 <p class="card-text">{{ 'Bank : ' . $mUsertree->parent->userdetail->bank->name }}</p>
                                                 <p class="card-text">{{ 'No. Rekening : ' . $mUsertree->parent->userdetail->bank_account_number }}</p>
+                                                <p class="card-text">{{ 'Price : ' . $mUsertree->parent_level == \App\Usertree::ADMIN_LEVEL ?  $mUsertree->price->admin_price : $mUsertree->price->non_admin_price}}</p>
                                             </div>
                                         </div>
                                     </form>
@@ -79,7 +79,7 @@
                     success: function (res) {
                         if (res.status) {
                             jThis.closest('form').find('.usertreeImage').attr('src', res.data.photo);
-                            jThis.closest('form').find('.usertreeStatus').text(res.data.status_photo);
+                            jThis.closest('form').find('.usertreeStatus').html(res.data.status_photo);
                         } else {
 
                         }

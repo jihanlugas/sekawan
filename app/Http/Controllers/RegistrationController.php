@@ -103,7 +103,7 @@ class RegistrationController extends Controller
     {
 //        $mUser = User::with(['userdetail.bank'])->where('id', 2)->get();
 //        dd($mUser);
-        $mUsertrees = Usertree::with(['parent.userdetail.bank', 'photoupload'])->where('user_id', Auth::user()->id)->get();
+        $mUsertrees = Usertree::with(['parent.userdetail.bank', 'photoupload', 'price'])->where('user_id', Auth::user()->id)->get();
         $complete = true;
         $now = new \DateTime();
         foreach ($mUsertrees as $i => $mUsertree) {
@@ -116,7 +116,7 @@ class RegistrationController extends Controller
                 $complete = false;
             }
 
-            $mUsertrees[$i]->status_photo = Usertree::$status_photo[$mUsertrees[$i]->status_photo];
+            $mUsertrees[$i]->status_photo = Usertree::$status_photo_tag[$mUsertrees[$i]->status_photo];
             $mUsertrees[$i]->photo = Photoupload::getFilepath($mUsertree->photo_id);
         }
 
@@ -145,7 +145,7 @@ class RegistrationController extends Controller
 
                 $data = Usertree::with(['parent', 'photoupload'])->where('id', $mUsertree->id)->first();
                 $data['photo'] = Photoupload::getFilepath($data->photo_id);
-                $data['status_photo'] = Usertree::$status_photo[$data->status_photo];
+                $data['status_photo'] = Usertree::$status_photo_tag[$data->status_photo];
 
                 $vResult['status'] = true;
                 $vResult['message'] = 'Success';
