@@ -36,5 +36,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/request', 'HomeController@request')->name('request');
 Route::post('/request', 'HomeController@postrequest');
 
+Route::get('/profile', 'HomeController@profile')->name('profile');
+
 
 

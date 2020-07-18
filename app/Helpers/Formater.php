@@ -17,76 +17,76 @@ class Formater
     public static $timeFormatWithSecond='H:i:s';
 
     //put your code here
-//    public function formatDate($value)
-//    {
-//        if(!is_numeric($value)) $value=strtotime ($value);
-//        return self::$toIndonesia(date(self::$dateFormat,$value));
-//    }
+    public static function formatDate($value)
+    {
+        if(!is_numeric($value)) $value=strtotime ($value);
+        return self::toIndonesia(date(self::$dateFormat,$value));
+    }
 
     public static function formatNumber($value)
     {
         return number_format($value, self::$numberFormat['decimals'], self::$numberFormat['decimalSeparator'], self::$numberFormat['thousandSeparator']);
     }
 
-    public function formatDateWithNumber($value)
+    public static function formatDateWithNumber($value)
     {
         if(!is_numeric($value)) $value=strtotime ($value);
         return date(self::$dateFormatWithNumber,$value);
     }
 
-//    public function formatDatetime($value)
-//    {
-//        if(!is_numeric($value)) $value=strtotime ($value);
-//        return self::$toIndonesia(date(self::$datetimeFormat,$value));
-//    }
+    public static function formatDatetime($value)
+    {
+        if(!is_numeric($value)) $value=strtotime ($value);
+        return self::toIndonesia(date(self::$datetimeFormat,$value));
+    }
 
-//    public function formatDaymonth($value)
-//    {
-//        if(!is_numeric($value)) $value=strtotime ($value);
-//        return self::$toIndonesia(date(self::$daymonthFormat,$value));
-//    }
+    public static function formatDaymonth($value)
+    {
+        if(!is_numeric($value)) $value=strtotime ($value);
+        return self::toIndonesia(date(self::$daymonthFormat,$value));
+    }
 
-//    public function formatDatetimeWithNumber($value)
-//    {
-//        if(!is_numeric($value)) $value=strtotime ($value);
-//        return self::$toIndonesia(date(self::$datetimeFormatWithNumber,$value));
-//    }
+    public static function formatDatetimeWithNumber($value)
+    {
+        if(!is_numeric($value)) $value=strtotime ($value);
+        return self::toIndonesia(date(self::$datetimeFormatWithNumber,$value));
+    }
 
-//    public function formatDatetimeWithMonthSec($value)
-//    {
-//        if(!is_numeric($value)) $value=strtotime ($value);
-//        return self::$toIndonesia(date(self::$datetimeFormatWithMonthSec,$value));
-//    }
+    public static function formatDatetimeWithMonthSec($value)
+    {
+        if(!is_numeric($value)) $value=strtotime ($value);
+        return self::toIndonesia(date(self::$datetimeFormatWithMonthSec,$value));
+    }
 
-//    public function formatDatetimeWithDay($value)
-//    {
-//        if(!is_numeric($value)) $value=strtotime ($value);
-//        return self::$toIndonesia(date(self::$datetimeFormatWithDay,$value));
-//    }
+    public static function formatDatetimeWithDay($value)
+    {
+        if(!is_numeric($value)) $value=strtotime ($value);
+        return self::toIndonesia(date(self::$datetimeFormatWithDay,$value));
+    }
 
-    public function formatTime($value)
+    public static function formatTime($value)
     {
         if(!is_numeric($value)) $value=strtotime ($value);
         return date(self::$timeFormat,$value);
     }
 
-    public function formatTimeWithSec($value)
+    public static function formatTimeWithSec($value)
     {
         if(!is_numeric($value)) $value=strtotime ($value);
         return date(self::$timeFormatWithSecond,$value);
     }
 
-//    public function formatMonth($value)
-//    {
-//        return self::$convertMonth($value);
-//    }
+    public static function formatMonth($value)
+    {
+        return self::convertMonth($value);
+    }
 
-    public function formatNumberWithDecimals($value)
+    public static function formatNumberWithDecimals($value)
     {
         return number_format($value,self::$numberFormatWithDecimals['decimals'],self::$numberFormatWithDecimals['decimalSeparator'],self::$numberFormatWithDecimals['thousandSeparator']);
     }
 
-    private function toIndonesia($strDate)
+    public static function toIndonesia($strDate)
     {
         $strDate = str_replace('May', 'Mei', $strDate);
         $strDate = str_replace('Aug', 'Ags', $strDate);
@@ -102,7 +102,7 @@ class Formater
         return $strDate;
     }
 
-    private function convertMonth($strMonth)
+    public static function convertMonth($strMonth)
     {
         $strMonth = str_replace('Jan', '01', $strMonth);
         $strMonth = str_replace('Feb', '02', $strMonth);

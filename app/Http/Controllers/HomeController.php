@@ -107,4 +107,10 @@ class HomeController extends AuthController
         return response()->json($vResult);
     }
 
+    public function profile(){
+        $mUser = User::with(['userdetail.bank'])->where('id', Auth::user()->id)->first();
+
+        return view('home.profile', ['mUser' => $mUser]);
+    }
+
 }
