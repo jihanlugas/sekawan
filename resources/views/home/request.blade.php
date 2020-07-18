@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="accordion-item__detail-item-contain">
                                             <div class="">Jumlah</div>
-                                            <div class="">1000000</div>
+                                            <div class="">{{ 'Rp ' . $mUsertree->total_didapat }}</div>
                                         </div>
                                     </div>
                                     <div class="accordion-item__detail-item">
@@ -72,7 +72,17 @@
                                         </div>
                                         <div class="accordion-item__detail-item-contain">
                                             <div class="">Jumlah</div>
-                                            <div class="">1000000</div>
+                                            <div class="">{{ 'Rp ' . $mUsertree->belum_didapat }}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion-item__detail-item">
+                                        <div class="accordion-item__detail-item-title">
+                                            Total
+                                        </div>
+                                        <div class="accordion-item__detail-item-contain">
+                                            <div class="">Jumlah</div>
+                                            <div class="">{{ 'Rp ' . $mUsertree->total }}</div>
                                         </div>
                                     </div>
                                 </div>

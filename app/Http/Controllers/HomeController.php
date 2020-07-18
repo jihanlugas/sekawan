@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Photoupload;
+use App\Price;
 use App\User;
 use App\Usertree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use App\Helpers\Formater;
 
 class HomeController extends AuthController
 {
@@ -32,13 +35,17 @@ class HomeController extends AuthController
     public function request()
     {
         $mUser = User::where('id', Auth::user()->id)->first();
+        $mPrice = Price::where('is_active', 1)->first();
         for ($level = 1; $level <= Usertree::USERTREE_LEVEL_LIMIT; $level++){
             $mUsertrees[$level] = Usertree::with(['user'])
                 ->where('parent_id', $mUser->id)
                 ->where('parent_level', $level)
                 ->orderBy('parent_level', 'ASC')->get();
 
-            $qTotalusertree = DB::selectOne("SELECT sum(prices.non_admin_price) as total
+            $total = $mPrice->non_admin_price * pow(User::USER_REQUEST_LIMIT, (Usertree::USERTREE_LEVEL_LIMIT - $level +1 ));
+
+
+            $qTotalusertree = DB::selectOne("SELECT sum(prices.non_admin_price) as total_didapat
                                                 FROM usertrees
                                                 JOIN prices ON prices.id = usertrees.price_id
                                                 WHERE parent_id = :pid
@@ -57,15 +64,17 @@ class HomeController extends AuthController
                 $mUsertrees[$level][$i]->photo = Photoupload::getFilepath($mUsertree->photo_id);
             }
 
-//            if (!empty($qTotalusertree)){
-//                $mUsertrees[$level]['total'] = $qTotalusertree['total'];
-//            }else{
-//                $mUsertrees[$level]['total'] = 0;
-//            }
+
+            if ($qTotalusertree->total_didapat){
+                $mUsertrees[$level]->total_didapat = $qTotalusertree->total_didapat;
+            }else {
+                $mUsertrees[$level]->total_didapat = 0;
+            }
+            $mUsertrees[$level]->total = Formater::formatNumber($total);
+            $mUsertrees[$level]->belum_didapat = Formater::formatNumber($total - $mUsertrees[$level]->total_didapat);
+            $mUsertrees[$level]->total_didapat = Formater::formatNumber($mUsertrees[$level]->total_didapat);
+
         }
-
-        dd($mUsertrees);
-
 
         return view('home.request', ['mUser' => $mUser, 'mUsertrees' => $mUsertrees]);
     }
