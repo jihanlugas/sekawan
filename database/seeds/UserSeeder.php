@@ -178,7 +178,7 @@ class UserSeeder extends Seeder
 
         $request_by = 0;
         foreach ($aarUsers as $i => $user) {
-            if ($i > 20)
+            if ($i > 10)
                 break;
 
             $mUser = new User();

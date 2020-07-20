@@ -88,7 +88,7 @@
                                 <div class="col-md-12">
                                     <label for="birth_dt" class="">{{ __('Birth of Date') }}</label>
                                     <input type="date"
-                                           class="form-control @error('birth_dt') is-invalid @enderror"
+                                           class="form-control @error('birth_dt') is-invalid @enderror" placeholder="dd-mm-yyyy"
                                            name="birth_dt" value="{{ old('birth_dt') }}" required autofocus>
                                     @error('birth_dt')
                                     <span class="invalid-feedback" role="alert">

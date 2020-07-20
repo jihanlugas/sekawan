@@ -34,7 +34,7 @@
                                                 <p class="card-text">{{ 'Name : ' . $mUsertree->parent->name }}</p>
                                                 <p class="card-text">{{ 'Bank : ' . $mUsertree->parent->userdetail->bank->name }}</p>
                                                 <p class="card-text">{{ 'No. Rekening : ' . $mUsertree->parent->userdetail->bank_account_number }}</p>
-                                                <p class="card-text">{{ 'Price : ' . $mUsertree->parent_level == \App\Usertree::ADMIN_LEVEL ?  $mUsertree->price->admin_price : $mUsertree->price->non_admin_price}}</p>
+                                                <p class="card-text">{{ 'Price : Rp ' }} {{ \App\Helpers\Formater::formatNumber($mUsertree->parent_level == \App\Usertree::ADMIN_LEVEL ?  $mUsertree->price->admin_price : $mUsertree->price->non_admin_price) }}</p>
                                             </div>
                                         </div>
                                     </form>
