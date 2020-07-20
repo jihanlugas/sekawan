@@ -17,5 +17,6 @@ mix.webpackConfig({
     }
 });
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js(['resources/js/app.js', 'node_modules/flatpickr/dist/flatpickr.js'], 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .stylus('node_modules/flatpickr/src/style/flatpickr.styl', 'public/css');

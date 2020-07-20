@@ -15,9 +15,22 @@
                     @endif
 
                     You are logged in!
+
+                        <input type="text" class="flatpickr">
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            // $('.flatpickr').flatpickr(function () {
+            //     enableTime: true,
+            //     dateFormat: "Y-m-d H:i",
+            // });
+        })
+    </script>
+@endpush
