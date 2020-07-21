@@ -10999,3 +10999,69 @@ Accordion item style
   margin-bottom: 0;
 }
 
+/** Ignore start */
+
+/** Ignore end */
+
+/**
+Accordion item style
+*/
+
+.accordion-item {
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0px 16px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.accordion-item__title {
+  display: flex;
+  margin: 0;
+  padding: 10px 0;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.accordion-item__arrow {
+  fill: #b721ff;
+}
+
+.accordion-item__content {
+  display: none;
+  overflow: hidden;
+}
+
+.accordion-item__detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item__detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-item__detail-item-title {
+  font-size: 16px;
+}
+
+.accordion-item__detail-item-contain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entry {
+  line-height: 1.74;
+}
+
+.entry p:last-of-type,
+.entry p:last-child {
+  margin-bottom: 0;
+}
+
