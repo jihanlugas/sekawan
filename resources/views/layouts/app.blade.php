@@ -61,7 +61,6 @@
                             </li>
                         @endif
                     @else
-
                         @if(Auth::user()->is_complete)
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('request') }}">{{ __('Request') }}</a>
@@ -109,7 +108,6 @@
                                 </div>
                             </li>
                         @endif
-
                     @endguest
                 </ul>
             </div>
