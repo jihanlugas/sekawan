@@ -1,6 +1,7 @@
  $(".flatpickr").flatpickr({
      enableTime: false,
      dateFormat: "Y-m-d",
+     disableMobile: true,
  });
 
  $(".flatpickr .flatpickr-datetime").flatpickr({
