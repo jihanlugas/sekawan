@@ -223,11 +223,11 @@
                                     </div>
                                 @else
                                     <div>
-                                        <button class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid" id="user-menu" aria-label="User menu" aria-haspopup="true">
+                                        <button class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid" id="user-menu-toggle" aria-label="User menu" aria-haspopup="true">
                                             <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                                         </button>
                                     </div>
-                                    <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
+                                    <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden" id="user-menu-context">
                                         <div class="py-1 rounded-md bg-white shadow-xs" role="menu"
                                              aria-orientation="vertical" aria-labelledby="user-menu">
                                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -245,7 +245,7 @@
                     </div>
                     <div class="-mr-2 flex md:hidden">
                         <!-- Mobile menu button -->
-                        <button
+                        <button id="nav-toggle"
                             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white">
                             <!-- Menu open: "hidden", Menu closed: "block" -->
                             <svg class="block h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -267,7 +267,7 @@
 
               Open: "block", closed: "hidden"
             -->
-            <div class="hidden md:hidden">
+            <div class="hidden md:hidden" id="nav-context">
                 <div class="px-2 pt-2 pb-3 sm:px-3">
                     <a href="#"
                        class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>
@@ -330,6 +330,7 @@
             crossorigin="anonymous"></script>
     @stack('script')
     <script>
+
     </script>
 </div>
 </body>
