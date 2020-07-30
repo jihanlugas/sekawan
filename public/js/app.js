@@ -22015,6 +22015,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(/*! ./custom/layout */ "./resources/js/custom/layout.js");
+
 __webpack_require__(/*! ./custom/accordion */ "./resources/js/custom/accordion.js");
 
 __webpack_require__(/*! ./custom/alert */ "./resources/js/custom/alert.js");
@@ -22194,6 +22196,47 @@ $(".flatpickr .flatpickr-datetime").flatpickr({
 
 /***/ }),
 
+/***/ "./resources/js/custom/layout.js":
+/*!***************************************!*\
+  !*** ./resources/js/custom/layout.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+document.getElementById('user-menu-toggle').onclick = function () {
+  document.getElementById("user-menu-context").classList.toggle("hidden");
+};
+
+document.getElementById('nav-toggle').onclick = function () {
+  document.getElementById("nav-context").classList.toggle("hidden");
+}; // window.addEventListener('click', function(e) {
+//     if(document.getElementById("user-menu-context").contains(e.target)){
+//         console.log('user menu' ,)
+//     }else{
+//         document.getElementById("user-menu-context").classList.toggle("hidden");
+//     }
+//
+//     if(document.getElementById("nav-context").contains(e.target)){
+//         console.log('nav menu' ,)
+//     }else{
+//         document.getElementById("nav-context").classList.toggle("hidden");
+//     }
+//
+//
+//     // var els = document.getElementsByClassName('dropdown');
+//     //
+//     // for (var i = 0; i < els.length; i++) {
+//     //     if (els[i].contains(e.target)) {
+//     //         // Clicked on dropdown
+//     //     } else {
+//     //         // Clicked outside the dropdown
+//     //         els[i].classList.remove('active');
+//     //     }
+//     // }
+// });
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -22212,10 +22255,10 @@ $(".flatpickr .flatpickr-datetime").flatpickr({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sekawan\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\xampp\htdocs\sekawan\node_modules\flatpickr\dist\flatpickr.js */"./node_modules/flatpickr/dist/flatpickr.js");
-__webpack_require__(/*! C:\xampp\htdocs\sekawan\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sekawan\node_modules\flatpickr\src\style\flatpickr.styl */"./node_modules/flatpickr/src/style/flatpickr.styl");
+__webpack_require__(/*! /var/www/sekawan/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /var/www/sekawan/node_modules/flatpickr/dist/flatpickr.js */"./node_modules/flatpickr/dist/flatpickr.js");
+__webpack_require__(/*! /var/www/sekawan/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /var/www/sekawan/node_modules/flatpickr/src/style/flatpickr.styl */"./node_modules/flatpickr/src/style/flatpickr.styl");
 
 
 /***/ })
