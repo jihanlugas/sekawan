@@ -101,24 +101,18 @@ class RegistrationController extends Controller
 
     public function upload()
     {
-//        $mUser = User::with(['userdetail.bank'])->where('id', 2)->get();
-//        dd($mUser);
         $mUsertrees = Usertree::with(['parent.userdetail.bank', 'photoupload', 'price'])->where('user_id', Auth::user()->id)->get();
-        $complete = true;
-        $now = new \DateTime();
         foreach ($mUsertrees as $i => $mUsertree) {
             if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addDay(Usertree::LIMIT_WAITING_DAY) <= Carbon::now())) {
                 $mUsertrees[$i]->status_photo = Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED;
                 $mUsertrees[$i]->save();
             }
 
-            if (!(($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_APPROVED) || ($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED))) {
-                $complete = false;
-            }
-
             $mUsertrees[$i]->status_photo = Usertree::$status_photo_tag[$mUsertrees[$i]->status_photo];
             $mUsertrees[$i]->photo = Photoupload::getFilepath($mUsertree->photo_id);
         }
+
+        $complete = Usertree::cekIscompletedata(Auth::user()->id);
 
         return view('registration.upload', ['mUsertrees' => $mUsertrees, 'complete' => $complete]);
     }
@@ -146,6 +140,8 @@ class RegistrationController extends Controller
                 $data = Usertree::with(['parent', 'photoupload'])->where('id', $mUsertree->id)->first();
                 $data['photo'] = Photoupload::getFilepath($data->photo_id);
                 $data['status_photo'] = Usertree::$status_photo_tag[$data->status_photo];
+                $data['complete'] = Usertree::cekIscompletedata(Auth::user()->id);
+
 
                 $vResult['status'] = true;
                 $vResult['message'] = 'Success';
@@ -162,8 +158,12 @@ class RegistrationController extends Controller
 
     public function completedata()
     {
-        $mUser = User::with(['userdetail'])->where('id', Auth::user()->id)->first();
-        return view('registration.completedata', ['mUser' => $mUser]);
+        if (Usertree::cekIscompletedata(Auth::user()->id)) {
+            $mUser = User::with(['userdetail'])->where('id', Auth::user()->id)->first();
+            return view('registration.completedata', ['mUser' => $mUser]);
+        }else{
+            return redirect(route('upload'));
+        }
     }
 
     public function postcompletedata(Request $request)
@@ -193,7 +193,7 @@ class RegistrationController extends Controller
 
             return redirect(route('successcompletedata'));
 
-            } catch (Throwable $e) {
+        } catch (Throwable $e) {
             DB::rollBack();
             dd($e);
         }

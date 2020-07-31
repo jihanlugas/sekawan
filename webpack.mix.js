@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 
-require('laravel-mix-tailwind');
-
+// require('laravel-mix-tailwind');
+const tailwindcss = require('tailwindcss');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -16,13 +16,12 @@ require('laravel-mix-tailwind');
 mix.js(['resources/js/app.js', 'node_modules/flatpickr/dist/flatpickr.js'], 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .stylus('node_modules/flatpickr/src/style/flatpickr.styl', 'public/css')
-    .tailwind('./tailwind.config.js');
-    // .options({
-    //     processCssUrls: false,
-    //     postCss: [tailwindcss('tailwind.config.js')],
-    // })
+    .options({
+        processCssUrls: false,
+        postCss: [tailwindcss('tailwind.config.js')],
+    });
 
-if (mix.inProduction()) {
-    mix
-        .version();
-}
+// if (mix.inProduction()) {
+//     mix
+//         .version();
+// }
