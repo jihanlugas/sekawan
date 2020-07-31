@@ -22188,11 +22188,10 @@ $(".flatpickr").flatpickr({
   enableTime: false,
   dateFormat: "Y-m-d",
   disableMobile: true
-});
-$(".flatpickr .flatpickr-datetime").flatpickr({
-  enableTime: false,
-  dateFormat: "Y-m-d H:i"
-});
+}); // $(".flatpickr .flatpickr-datetime").flatpickr({
+//     enableTime: false,
+//     dateFormat: "Y-m-d H:i",
+// });
 
 /***/ }),
 
@@ -22203,13 +22202,19 @@ $(".flatpickr .flatpickr-datetime").flatpickr({
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-document.getElementById('user-menu-toggle').onclick = function () {
-  document.getElementById("user-menu-context").classList.toggle("hidden");
-};
-
-document.getElementById('nav-toggle').onclick = function () {
-  document.getElementById("nav-context").classList.toggle("hidden");
-}; // window.addEventListener('click', function(e) {
+// document.getElementById('user-menu-toggle').onclick = function(){
+//     document.getElementById("user-menu-context").classList.toggle("hidden");
+// }
+//
+// document.getElementById('nav-toggle').onclick = function(){
+//     document.getElementById("nav-context").classList.toggle("hidden");
+// }
+$('#user-menu-toggle').click(function () {
+  $('#user-menu-context').toggle('.hidden');
+});
+$('#nav-toggle').click(function () {
+  $('#nav-context').toggle('.hidden');
+}); // window.addEventListener('click', function(e) {
 //     if(document.getElementById("user-menu-context").contains(e.target)){
 //         console.log('user menu' ,)
 //     }else{
@@ -22255,10 +22260,10 @@ document.getElementById('nav-toggle').onclick = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/sekawan/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /var/www/sekawan/node_modules/flatpickr/dist/flatpickr.js */"./node_modules/flatpickr/dist/flatpickr.js");
-__webpack_require__(/*! /var/www/sekawan/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /var/www/sekawan/node_modules/flatpickr/src/style/flatpickr.styl */"./node_modules/flatpickr/src/style/flatpickr.styl");
+__webpack_require__(/*! C:\xampp\htdocs\sekawan\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\xampp\htdocs\sekawan\node_modules\flatpickr\dist\flatpickr.js */"./node_modules/flatpickr/dist/flatpickr.js");
+__webpack_require__(/*! C:\xampp\htdocs\sekawan\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sekawan\node_modules\flatpickr\src\style\flatpickr.styl */"./node_modules/flatpickr/src/style/flatpickr.styl");
 
 
 /***/ })

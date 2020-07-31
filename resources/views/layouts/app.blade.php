@@ -20,14 +20,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/flatpickr.css') }}" rel="stylesheet">
-    {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">--}}
-
-    {{--    <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}">--}}
-
-    {{--    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">--}}
-    {{--    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">--}}
-    {{--    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">--}}
-    {{--    <link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}">--}}
 
 </head>
 <body>
@@ -172,20 +164,34 @@
                                  alt="Workflow logo">
                         </div>
                         @guest
+                            <div class="hidden md:block">
+                                <div class="ml-10 flex items-baseline">
+                                    {{--                                        <a href="#"--}}
+                                    {{--                                           class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>--}}
+                                    <a href="{{ route('beranda') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
+                                    <a href="{{ route('tentang') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
+                                    <a href="{{ route('tentang') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Testimoni</a>
+                                    <a href="{{ route('tentang') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan Sosial</a>
+                                </div>
+                            </div>
                         @else
                             @if(Auth::user()->is_complete)
                                 <div class="hidden md:block">
                                     <div class="ml-10 flex items-baseline">
-                                        <a href="#"
-                                           class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Team</a>
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Projects</a>
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Calendar</a>
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+{{--                                        <a href="#"--}}
+{{--                                           class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>--}}
+                                        <a href="{{ route('beranda') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
+                                        <a href="{{ route('tentang') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
+                                        <a href="{{ route('tentang') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Testimoni</a>
+                                        <a href="{{ route('tentang') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan Sosial</a>
                                     </div>
                                 </div>
                             @else
@@ -195,25 +201,7 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-4 flex items-center md:ml-6">
-                        {{--                            <button class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700" aria-label="Notifications">--}}
-                        {{--                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">--}}
-                        {{--                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />--}}
-                        {{--                                </svg>--}}
-                        {{--                            </button>--}}
-
-                        <!-- Profile dropdown -->
                             <div class="ml-3 relative">
-                                <!--
-                                  Profile dropdown panel, show/hide based on dropdown state.
-
-                                  Entering: "transition ease-out duration-100"
-                                    From: "transform opacity-0 scale-95"
-                                    To: "transform opacity-100 scale-100"
-                                  Leaving: "transition ease-in duration-75"
-                                    From: "transform opacity-100 scale-100"
-                                    To: "transform opacity-0 scale-95"
-                                -->
-
                                 @guest
                                     <div class="ml-10 flex items-baseline">
                                         <a href="{{ route('login') }}"
@@ -231,13 +219,15 @@
                                                  alt="">
                                         </button>
                                     </div>
-                                    <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden"
+                                    <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden c-tw-js"
                                          id="user-menu-context">
                                         <div class="py-1 rounded-md bg-white shadow-xs" role="menu"
                                              aria-orientation="vertical" aria-labelledby="user-menu">
+                                            @if(Auth::user()->is_complete)
                                             <a href="{{ route('profile') }}"
                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                role="menuitem">Profile</a>
+                                            @endif
                                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                                role="menuitem">Sign out</a>
@@ -272,59 +262,67 @@
 
               Open: "block", closed: "hidden"
             -->
-            <div class="hidden md:hidden" id="nav-context">
+            <div class="hidden md:hidden c-tw-js" id="nav-context">
                 <div class="px-2 pt-2 pb-3 sm:px-3">
-                    <a href="#"
-                       class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Team</a>
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Projects</a>
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Calendar</a>
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+{{--                    <a href="#"--}}
+{{--                       class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>--}}
+                    <a href="{{ route('beranda') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
+                    <a href="{{ route('tentang') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
+                    <a href="{{ route('tentang') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Testimoni</a>
+                    <a href="{{ route('tentang') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan Sosial</a>
                 </div>
-                <div class="pt-4 pb-3 border-t border-gray-700">
-                    <div class="flex items-center px-5">
-                        <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full"
-                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                 alt="">
+                <div class="pt-3 pb-3 border-t border-gray-700">
+                    @guest
+                        <div class="px-2">
+                            <a href="{{ route('login') }}"
+                               class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Login</a>
+                            <a href="{{ route('register') }}"
+                               class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Register</a>
                         </div>
-                        <div class="ml-3">
-                            <div class="text-base font-medium leading-none text-white">Tom Cook</div>
-                            <div class="mt-1 text-sm font-medium leading-none text-gray-400">tom@example.com</div>
+                    @else
+                        <div class="flex items-center px-5">
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10 rounded-full"
+                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                     alt="">
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-base font-medium leading-none text-white">Tom Cook</div>
+                                <div class="mt-1 text-sm font-medium leading-none text-gray-400">tom@example.com</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mt-3 px-2">
-                        <a href="{{ route('profile') }}"
-                           class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Your
-                            Profile</a>
-                        <a href="#"
-                           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
-                            Sign out</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                            {{ csrf_field() }}
-                        </form>
-                    </div>
+                        <div class="mt-3 px-2">
+                            @if(Auth::user()->is_complete)
+                            <a href="{{ route('profile') }}"
+                               class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Your
+                                Profile</a>
+                            @endif
+                            <a href="#"
+                               class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
+                                Sign out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                {{ csrf_field() }}
+                            </form>
+                        </div>
+                    @endguest
                 </div>
             </div>
         </nav>
 
         <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="p-4 max-w-3xl mx-auto">
                 <h1 class="text-3xl font-bold leading-tight text-gray-900">
                     @yield('header')
                 </h1>
             </div>
         </header>
         <main>
-            <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                @yield('content')
-                {{--                                    <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>--}}
-            </div>
+            @yield('content')
         </main>
     </div>
 
