@@ -16,20 +16,7 @@ $('#nav-toggle').click(function () {
 })
 
 // window.addEventListener('click', function(e) {
-//     if(document.getElementById("user-menu-context").contains(e.target)){
-//         console.log('user menu' ,)
-//     }else{
-//         document.getElementById("user-menu-context").classList.toggle("hidden");
-//     }
-//
-//     if(document.getElementById("nav-context").contains(e.target)){
-//         console.log('nav menu' ,)
-//     }else{
-//         document.getElementById("nav-context").classList.toggle("hidden");
-//     }
-//
-//
-//     // var els = document.getElementsByClassName('dropdown');
+//     // var els = document.getElementsByClassName('c-tw-js');
 //     //
 //     // for (var i = 0; i < els.length; i++) {
 //     //     if (els[i].contains(e.target)) {
@@ -39,4 +26,15 @@ $('#nav-toggle').click(function () {
 //     //         els[i].classList.remove('active');
 //     //     }
 //     // }
+//
+//     var els = document.querySelectorAll('.c-tw-js.hidden');
+//
+//     for (var i = 0; i < els.length; i++) {
+//         if (els[i].contains(e.target)) {
+//             // Clicked on dropdown
+//         } else {
+//             // Clicked outside the dropdown
+//             els[i].toggle('.hidden')
+//         }
+//     }
 // });

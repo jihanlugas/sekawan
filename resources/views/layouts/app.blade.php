@@ -164,20 +164,34 @@
                                  alt="Workflow logo">
                         </div>
                         @guest
+                            <div class="hidden md:block">
+                                <div class="ml-10 flex items-baseline">
+                                    {{--                                        <a href="#"--}}
+                                    {{--                                           class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>--}}
+                                    <a href="{{ route('beranda') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
+                                    <a href="{{ route('tentang') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
+                                    <a href="{{ route('tentang') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Testimoni</a>
+                                    <a href="{{ route('tentang') }}"
+                                       class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan Sosial</a>
+                                </div>
+                            </div>
                         @else
                             @if(Auth::user()->is_complete)
                                 <div class="hidden md:block">
                                     <div class="ml-10 flex items-baseline">
 {{--                                        <a href="#"--}}
 {{--                                           class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>--}}
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Team</a>
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Projects</a>
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Calendar</a>
-                                        <a href="#"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+                                        <a href="{{ route('beranda') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
+                                        <a href="{{ route('tentang') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
+                                        <a href="{{ route('tentang') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Testimoni</a>
+                                        <a href="{{ route('tentang') }}"
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan Sosial</a>
                                     </div>
                                 </div>
                             @else
@@ -205,7 +219,7 @@
                                                  alt="">
                                         </button>
                                     </div>
-                                    <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden"
+                                    <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg hidden c-tw-js"
                                          id="user-menu-context">
                                         <div class="py-1 rounded-md bg-white shadow-xs" role="menu"
                                              aria-orientation="vertical" aria-labelledby="user-menu">
@@ -248,18 +262,18 @@
 
               Open: "block", closed: "hidden"
             -->
-            <div class="hidden md:hidden" id="nav-context">
+            <div class="hidden md:hidden c-tw-js" id="nav-context">
                 <div class="px-2 pt-2 pb-3 sm:px-3">
 {{--                    <a href="#"--}}
 {{--                       class="block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard</a>--}}
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Team</a>
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Projects</a>
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Calendar</a>
-                    <a href="#"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Reports</a>
+                    <a href="{{ route('beranda') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
+                    <a href="{{ route('tentang') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
+                    <a href="{{ route('tentang') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Testimoni</a>
+                    <a href="{{ route('tentang') }}"
+                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan Sosial</a>
                 </div>
                 <div class="pt-3 pb-3 border-t border-gray-700">
                     @guest

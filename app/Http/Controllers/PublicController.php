@@ -16,9 +16,19 @@ class PublicController extends Controller
         return view('home');
     }
 
+    public function beranda()
+    {
+        return view('beranda');
+    }
+
     public function success()
     {
         return view('success');
+    }
+
+    public function tentang()
+    {
+        return view('tentang');
     }
 
 

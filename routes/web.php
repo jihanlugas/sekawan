@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
+Route::get('/', 'PublicController@beranda')->name('beranda');
+Route::get('/beranda', 'PublicController@beranda')->name('beranda');
+Route::get('/tentang', 'PublicController@tentang')->name('tentang');
 Route::get('/success', 'PublicController@success')->name('success');
 
 Auth::routes();
