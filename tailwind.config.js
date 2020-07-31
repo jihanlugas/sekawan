@@ -1,8 +1,13 @@
 module.exports = {
-  purge: [],
+  purge: [
+    './resources/views/**/*.blade.php',
+    './resources/css/**/*.css',
+  ],
   theme: {
-    extend: {},
+    extend: {}
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/custom-forms')
+  ]
 }

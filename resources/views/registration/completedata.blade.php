@@ -97,11 +97,6 @@
                 @enderror
             </div>
 
-            <div class="">
-                <label for="">flatpickr</label>
-                <input type="text" class="flatpickrr">
-            </div>
-
             <div class="flex flex-wrap justify-end">
                 <button type="submit"
                         class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700">

@@ -21,7 +21,7 @@ mix.js(['resources/js/app.js', 'node_modules/flatpickr/dist/flatpickr.js'], 'pub
         postCss: [tailwindcss('tailwind.config.js')],
     });
 
-// if (mix.inProduction()) {
-//     mix
-//         .version();
-// }
+if (mix.inProduction()) {
+    mix
+        .version();
+}
