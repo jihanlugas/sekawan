@@ -6,7 +6,7 @@
             @csrf
             <div class="flex flex-wrap mb-6">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Name') }}:
+                    {{ __('Nama') }}:
                 </label>
 
                 <input id="name" type="text" class="form-input w-full @error('name')  border-red-500 @enderror"
@@ -21,7 +21,7 @@
 
             <div class="flex flex-wrap mb-6">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('E-Mail Address') }}:
+                    {{ __('Alamat E-Mail') }}:
                 </label>
 
                 <input id="email" type="email" class="form-input w-full @error('email') border-red-500 @enderror"
@@ -59,19 +59,18 @@
                        required autocomplete="new-password">
             </div>
 
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap justify-end">
                 <button type="submit"
-                        class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700">
+                        class="inline-block align-middle text-ri select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700">
                     {{ __('Register') }}
                 </button>
-
+            </div>
                 <p class="w-full text-xs text-center text-gray-700 mt-8 -mb-4">
-                    {{ __('Already have an account?') }}
+                    {{ __('Sudah punya akun?') }}
                     <a class="text-blue-500 hover:text-blue-700 no-underline" href="{{ route('login') }}">
                         {{ __('Login') }}
                     </a>
                 </p>
-            </div>
         </form>
     </div>
 @endsection

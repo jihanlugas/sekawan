@@ -20,36 +20,57 @@
                 <div class="accordion-item__content p-3" style="display: none">
                     @if(!$mUsertree->isEmpty())
                         @foreach($mUsertree as $i => $usertree)
-                            <div class="entry p-4">
-                                <div class="card mb-4 usertreeCard" style="width: 100%">
-                                    <img
-                                        class="card-img-top usertreeImage {{ $usertree->photo ? '' : 'btnInputimage' }} "
-                                        src="{{ $usertree->photo ? $usertree->photo : asset('img/default-photo.jpg') }}"
-                                        alt="Card image cap">
-                                    <input type="file" class="d-none inputImage" name="photo_id "
-                                           data-userid="{{ $usertree->user_id }}">
-                                    <input type="text" class="d-none" name="parent_id"
-                                           value="{{ $usertree->user_id }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title usertreeStatus">
-                                            <label>{{ \App\Usertree::$status_photo[$usertree->status_photo] }}</label>
-                                        </h5>
-                                        <p class="card-text">{{ 'Name : ' . $usertree->user->name }}</p>
-                                        @if($usertree->status_photo == \App\Usertree::STATUS_PHOTO_WAITING)
-                                            <div class="form-group row mb-0">
-                                                <div class="col text-right">
-                                                    <button class="btn btn-danger btnReject"
-                                                            data-userid="{{ $usertree->user_id }}">Reject
-                                                    </button>
-                                                    <button class="btn btn-primary btnApprove"
-                                                            data-userid="{{ $usertree->user_id }}">Approve
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    </div>
+                            <div class="entry max-w-full rounded overflow-hidden shadow-lg mb-3">
+                                <img class="w-full"
+                                     src="{{ $usertree->photo ? $usertree->photo : asset('img/default-photo.jpg') }}"
+                                     alt="">
+                                <div class="p-4">
+                                    <div class="mb-2 usertreeStatus"><?= \App\Usertree::$status_photo_tag[$usertree->status_photo] ?></div>
+                                    <div class="font-bold text-xl mb-2">{{ $usertree->user->name }}</div>
+                                    @if($usertree->status_photo == \App\Usertree::STATUS_PHOTO_WAITING)
+                                        <div class="flex w-full justify-end items-center actionButton">
+                                            <button
+                                                data-userid="{{ $usertree->user_id }}" class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 mr-2 btnApprove">
+                                                Approve
+                                            </button>
+                                            <button
+                                                data-userid="{{ $usertree->user_id }}" class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-red-500 hover:bg-red-700 btnReject">
+                                                Reject
+                                            </button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
+                            {{--                            <div class="entry p-4">--}}
+                            {{--                                <div class="card mb-4 usertreeCard" style="width: 100%">--}}
+                            {{--                                    <img--}}
+                            {{--                                        class="card-img-top usertreeImage {{ $usertree->photo ? '' : 'btnInputimage' }} "--}}
+                            {{--                                        src="{{ $usertree->photo ? $usertree->photo : asset('img/default-photo.jpg') }}"--}}
+                            {{--                                        alt="Card image cap">--}}
+                            {{--                                    <input type="file" class="d-none inputImage" name="photo_id "--}}
+                            {{--                                           data-userid="{{ $usertree->user_id }}">--}}
+                            {{--                                    <input type="text" class="d-none" name="parent_id"--}}
+                            {{--                                           value="{{ $usertree->user_id }}">--}}
+                            {{--                                    <div class="card-body">--}}
+                            {{--                                        <h5 class="card-title usertreeStatus">--}}
+                            {{--                                            <label>{{ \App\Usertree::$status_photo[$usertree->status_photo] }}</label>--}}
+                            {{--                                        </h5>--}}
+                            {{--                                        <p class="card-text">{{ 'Name : ' . $usertree->user->name }}</p>--}}
+                            {{--                                        @if($usertree->status_photo == \App\Usertree::STATUS_PHOTO_WAITING)--}}
+                            {{--                                            <div class="form-group row mb-0">--}}
+                            {{--                                                <div class="col text-right">--}}
+                            {{--                                                    <button class="btn btn-danger btnReject"--}}
+                            {{--                                                            data-userid="{{ $usertree->user_id }}">Reject--}}
+                            {{--                                                    </button>--}}
+                            {{--                                                    <button class="btn btn-primary btnApprove"--}}
+                            {{--                                                            data-userid="{{ $usertree->user_id }}">Approve--}}
+                            {{--                                                    </button>--}}
+                            {{--                                                </div>--}}
+                            {{--                                            </div>--}}
+                            {{--                                        @endif--}}
+                            {{--                                    </div>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
                         @endforeach
                     @else
                         <div class="entry p-4">
@@ -111,7 +132,7 @@
 
             function postrequest(jThis, requeststatus) {
                 var user_id = jThis.data('userid');
-                var usertreeStatus = jThis.closest('.card-body').find('.usertreeStatus');
+                var usertreeStatus = jThis.closest('.entry').find('.usertreeStatus');
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     url: url,
@@ -121,10 +142,9 @@
                         status_photo: requeststatus,
                     },
                     success: function (res) {
-                        console.log('res', res)
                         if (res.status) {
-                            usertreeStatus.find('label').text(res.status_photo_name)
-                            jThis.closest('.form-group').remove();
+                            usertreeStatus.html(res.status_photo_tag);
+                            jThis.closest('.actionButton').remove();
                         } else {
 
                         }

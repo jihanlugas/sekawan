@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('header', 'Uploads')
+@section('header', 'Upload Bukti')
 
 @section('content')
     <div class="py-6 px-4 max-w-3xl mx-auto">
-        @if($mUsertrees)
-            @foreach($mUsertrees as $i => $mUsertree)
-                <form method="POST" action="{{ route('upload') }}"
-                      id="form-{{ $mUsertree->parent_id }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="max-w-full rounded overflow-hidden shadow-lg mb-3 usertreeCard">
+        <div class="flex flex-wrap">
+            @forelse($mUsertrees as $i => $mUsertree)
+                <div class="w-full p-0 sm:w-full md:w-1/2 lg:w-1/2 md:p-4 lg:p-4">
+                    <form method="POST" action="{{ route('upload') }}"
+                          id="form-{{ $mUsertree->parent_id }}" enctype="multipart/form-data">
+                        @csrf
                         <img class="w-full usertreeImage btnInputimage"
                              src="{{ $mUsertree->photo ? $mUsertree->photo : asset('img/default-photo.jpg') }}"
                              alt="">
@@ -16,28 +16,30 @@
                                data-parentid="{{ $mUsertree->parent_id }}">
                         <input type="text" class="hidden" name="parent_id"
                                value="{{ $mUsertree->parent_id }}">
-                        <div class="p-4">
+                        <div class="py-4 px-0">
                             <div class="font-bold text-xl mb-2 usertreeStatus">
                                 <?= $mUsertree->status_photo ?>
                             </div>
                             <div class="font-bold text-xl mb-2">{{ $mUsertree->parent->name }}</div>
-                            <p class="text-gray-700 text-base">{{ 'Bank : ' . $mUsertree->parent->userdetail->bank->name }}</p>
-                            <p class="text-gray-700 text-base">{{ 'No. Rekening : ' . $mUsertree->parent->userdetail->bank_account_number }}</p>
-                            <p class="text-gray-700 text-base">{{ 'Price : Rp ' }} {{ \App\Helpers\Formater::formatNumber($mUsertree->parent_level == \App\Usertree::ADMIN_LEVEL ?  $mUsertree->price->admin_price : $mUsertree->price->non_admin_price) }}</p>
-
+                            <div class="flex justify-between items-center text-gray-700 text-base">
+                                <span>Bank</span>
+                                <span>{{ $mUsertree->parent->userdetail->bank->name }}</span>
+                            </div>
+                            <div class="flex justify-between items-center text-gray-700 text-base">
+                                <span>No. Rekening</span>
+                                <span>{{ $mUsertree->parent->userdetail->bank_account_number }}</span>
+                            </div>
+                            <div class="flex justify-between items-center text-gray-700 text-base">
+                                <span>Jumlah</span>
+                                <span>{{ 'Rp ' . \App\Helpers\Formater::formatNumber($mUsertree->parent_level == \App\Usertree::ADMIN_LEVEL ?  $mUsertree->price->admin_price : $mUsertree->price->non_admin_price) }}</span>
+                            </div>
                         </div>
-                        {{--                        <div class="px-6 py-4">--}}
-                        {{--                                    <span--}}
-                        {{--                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#photography</span>--}}
-                        {{--                            <span--}}
-                        {{--                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">#travel</span>--}}
-                        {{--                            <span--}}
-                        {{--                                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#winter</span>--}}
-                        {{--                        </div>--}}
-                    </div>
-                </form>
-            @endforeach
-        @endif
+                    </form>
+                </div>
+            @empty
+            @endforelse
+        </div>
+
 
         @if($complete)
             <div class="flex flex-wrap">
