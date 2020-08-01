@@ -20,11 +20,11 @@ class Usertree extends Model
     const STATUS_PHOTO_AUTOMATIC_APPROVED = 30;
     const STATUS_PHOTO_REJECTTED = 50;
 
-    const STATUS_PHOTO_NO_DATA_NAME = 'No data';
-    const STATUS_PHOTO_WAITING_NAME = 'Waiting';
-    const STATUS_PHOTO_APPROVED_NAME = 'Approved';
-    const STATUS_PHOTO_AUTOMATIC_APPROVED_NAME = 'Automatic Approved';
-    const STATUS_PHOTO_REJECTTED_NAME = 'Reject';
+    const STATUS_PHOTO_NO_DATA_NAME = 'Tidak Ada Data';
+    const STATUS_PHOTO_WAITING_NAME = 'Menunggu Konfirmasi';
+    const STATUS_PHOTO_APPROVED_NAME = 'Diterima';
+    const STATUS_PHOTO_AUTOMATIC_APPROVED_NAME = 'Diterima Otomatis';
+    const STATUS_PHOTO_REJECTTED_NAME = 'Ditolak';
 
     const STATUS_PHOTO_NO_DATA_TAG = '<span class="inline-block rounded-full px-3 py-1 text-lg font-bold text-gray-100 bg-gray-600">' . self::STATUS_PHOTO_NO_DATA_NAME . '</span>';
     const STATUS_PHOTO_WAITING_TAG = '<span class="inline-block rounded-full px-3 py-1 text-lg font-bold text-gray-100 bg-blue-600">' . self::STATUS_PHOTO_WAITING_NAME . '</span>';

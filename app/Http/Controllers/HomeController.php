@@ -96,7 +96,7 @@ class HomeController extends AuthController
                     DB::commit();
                     $vResult['status'] = true;
                     $vResult['user_id'] = $request->user_id;
-                    $vResult['status_photo_name'] = Usertree::$status_photo[$mUsertree->status_photo];
+                    $vResult['status_photo_tag'] = Usertree::$status_photo_tag[$mUsertree->status_photo];
                 } catch (Throwable $e) {
                     DB::rollBack();
                     dd($e);
