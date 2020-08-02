@@ -31,5 +31,15 @@ class PublicController extends Controller
         return view('tentang');
     }
 
+    public function petunjuk()
+    {
+        return view('petunjuk');
+    }
+
+    public function kegiatansosial()
+    {
+        return view('kegiatansosial');
+    }
+
 
 }
