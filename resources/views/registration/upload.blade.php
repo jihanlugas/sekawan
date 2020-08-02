@@ -5,7 +5,7 @@
     <div class="py-6 px-4 max-w-3xl mx-auto">
         <div class="flex flex-wrap">
             @forelse($mUsertrees as $i => $mUsertree)
-                <div class="w-full p-0 sm:w-full md:w-1/2 lg:w-1/2 md:p-4 lg:p-4">
+                <div class="w-full p-0 sm:w-full md:w-1/2 lg:w-1/2 md:p-4 lg:p-4 usertreeCard">
                     <form method="POST" action="{{ route('upload') }}"
                           id="form-{{ $mUsertree->parent_id }}" enctype="multipart/form-data">
                         @csrf
