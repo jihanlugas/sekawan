@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    const USER_REQUEST_LIMIT = 8;
+    const USER_REQUEST_LIMIT = 10;
 
     const USER_INVITATION_CD_CHARACTER = 6;
 
