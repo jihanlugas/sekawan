@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header', 'Complate Data')
+@section('header', 'Data Anggota')
 
 @section('content')
     <div class="py-6 px-4 max-w-3xl mx-auto">
@@ -9,7 +9,7 @@
             @csrf
             <div class="flex flex-wrap mb-6">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Name') }}
+                    {{ __('Nama') }}
                 </label>
                 <input id="name" type="text" class="form-input w-full cursor-not-allowed bg-gray-200" name="name"
                        value="{{ $mUser->name }}" readonly>
@@ -25,12 +25,12 @@
 
             <div class="flex flex-wrap mb-6 relative">
                 <label for="birth_dt" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Birth Date') }}
+                    {{ __('Tanggal Lahir') }}
                 </label>
 
                 <input id="birth_dt" type="text"
                        class="form-input w-full flatpickr @error('birth_dt') border-red-500 @enderror" name="birth_dt"
-                       value="{{ old('birth_dt') }}" autofocus>
+                       value="{{ old('birth_dt') }}" placeholder="Tanggal Lahir" autofocus>
 
                 @error('birth_dt')
                 <p class="text-red-500 text-xs italic mt-4">
@@ -41,7 +41,7 @@
 
             <div class="flex flex-wrap mb-6">
                 <label for="bank_id" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Bank Account Number') }}
+                    {{ __('Nama Bank') }}
                 </label>
                 <div class="relative w-full">
                     <select class="block form-input appearance-none w-full pr-8" id="grid-state" name="bank_id"
@@ -67,12 +67,12 @@
 
             <div class="flex flex-wrap mb-6">
                 <label for="bank_account_number" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Bank Account Number') }}
+                    {{ __('No. Rekening') }}
                 </label>
 
                 <input id="bank_account_number" type="text"
                        class="form-input w-full @error('bank_account_number') border-red-500 @enderror"
-                       name="bank_account_number" value="{{ old('bank_account_number') }}" autofocus>
+                       name="bank_account_number" value="{{ old('bank_account_number') }}" placeholder="No. Rekening" autofocus>
 
                 @error('bank_account_number')
                 <p class="text-red-500 text-xs italic mt-4">
@@ -83,12 +83,12 @@
 
             <div class="flex flex-wrap mb-6">
                 <label for="bank_account_name" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Bank Account Name') }}
+                    {{ __('Atas Nama Rekening') }}
                 </label>
 
                 <input id="bank_account_name" type="text"
                        class="form-input w-full @error('bank_account_name') border-red-500 @enderror"
-                       name="bank_account_name" value="{{ old('bank_account_name') }}" autofocus>
+                       name="bank_account_name" value="{{ old('bank_account_name') }}" placeholder="Nama Pemilik Rekening" autofocus>
 
                 @error('bank_account_name')
                 <p class="text-red-500 text-xs italic mt-4">

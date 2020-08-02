@@ -16,6 +16,10 @@ class User extends Authenticatable
 
     const USER_INVITATION_CD_CHARACTER = 6;
 
+    const USER_PRICE_SEEDER_NON_ADMIN = 25000; // Rp 25.000
+
+    const USER_PRICE_SEEDER_ADMIN = 25000; // Rp 25.000
+
     /**
      * The attributes that are mass assignable.
      *
