@@ -20,9 +20,12 @@
                     {{ $message }}
                 </p>
                 @enderror
-                <p class="text-red-500 text-xs italic mt-4">
-                    * Jika anda memasukan kode undangan kembali, semua data dari kode undangan sebelumnya akan terhapus
-                </p>
+                @if(Auth::user()->request_by)
+                    <p class="text-red-500 text-xs italic mt-4">
+                        * Jika anda memasukan kode undangan kembali, semua data dari kode undangan sebelumnya akan
+                        terhapus
+                    </p>
+                @endif
             </div>
             <div class="flex flex-wrap items-center justify-end">
                 <button type="submit"
