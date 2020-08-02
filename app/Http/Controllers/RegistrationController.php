@@ -103,7 +103,12 @@ class RegistrationController extends Controller
     {
         $mUsertrees = Usertree::with(['parent.userdetail.bank', 'photoupload', 'price'])->where('user_id', Auth::user()->id)->get();
         foreach ($mUsertrees as $i => $mUsertree) {
-            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addDay(Usertree::LIMIT_WAITING_DAY) <= Carbon::now())) {
+//            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addDay(Usertree::LIMIT_WAITING_DAY) <= Carbon::now())) {
+//                $mUsertrees[$i]->status_photo = Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED;
+//                $mUsertrees[$i]->save();
+//            }
+
+            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addMinute(Usertree::LIMIT_WAITING_MINUTE) <= Carbon::now())) {
                 $mUsertrees[$i]->status_photo = Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED;
                 $mUsertrees[$i]->save();
             }
