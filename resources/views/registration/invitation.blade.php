@@ -15,12 +15,14 @@
                 <input id="invitation_cd" type="text"
                        class="form-input w-full @error('invitation_cd') border-red-500 @enderror"
                        name="invitation_cd" value="{{ old('invitation_cd') }}" required autofocus>
-
                 @error('invitation_cd')
                 <p class="text-red-500 text-xs italic mt-4">
                     {{ $message }}
                 </p>
                 @enderror
+                <p class="text-red-500 text-xs italic mt-4">
+                    * Jika anda memasukan kode undangan kembali, semua data dari kode undangan sebelumnya akan terhapus
+                </p>
             </div>
             <div class="flex flex-wrap items-center justify-end">
                 <button type="submit"
