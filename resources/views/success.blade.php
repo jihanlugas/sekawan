@@ -1,41 +1,21 @@
 @extends('layouts.app')
 
+@section('header', 'Sukses')
+
 @section('content')
-{{--    <div class="container">--}}
-{{--        <div class="row justify-content-center">--}}
-{{--            <div class="col-md-8">--}}
-{{--                <div class="card">--}}
-{{--                    <div class="card-header">Success</div>--}}
+    <div class="py-6 px-4 max-w-3xl mx-auto">
 
-{{--                    <div class="card-body">--}}
-{{--                        @if (session('status'))--}}
-{{--                            <div class="alert alert-success" role="alert">--}}
-{{--                                {{ session('status') }}--}}
-{{--                            </div>--}}
-{{--                        @endif--}}
+        <div class="w-full p-6 text-center">
+            <p class="text-gray-700 text-2xl font-bold mb-4">
+                Registrasi Berhasil
+            </p>
 
-{{--                        Registration Successfully--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+            <p class="text-gray-700 text-base">
+                Silahkan login untuk melanjutkan
+            </p>
 
-
-    <div class="flex items-center">
-        <div class="md:w-1/2 md:mx-auto">
-            <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
-
-                <div class="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
-                    Success
-                </div>
-
-                <div class="w-full p-6">
-                    <p class="text-gray-700">
-                        Registration Successfully
-                    </p>
-                </div>
-            </div>
+            <a href="{{ route('login') }}" class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 mt-8">Login Disini</a>
         </div>
     </div>
+
 @endsection
