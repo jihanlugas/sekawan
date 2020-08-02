@@ -149,7 +149,11 @@
                 Program untuk saling berbagi demi kehidupan yang layak.
             </div>
 
-
+            @guest()
+                <div class="text-center w-full mt-8">
+                    <a href="{{ route('register') }}" class="bg-blue-600 py-2 px-4 text-gray-100 font-bold rounded">Mendaftar</a>
+                </div>
+            @endguest
 
         </div>
     </div>
