@@ -175,6 +175,7 @@ class RegistrationController extends Controller
     {
         if (Usertree::cekIscompletedata(Auth::user()->id)) {
             $mUser = User::with(['userdetail'])->where('id', Auth::user()->id)->first();
+//            dd($mUser);
             return view('registration.completedata', ['mUser' => $mUser]);
         }else{
             return redirect(route('upload'));
