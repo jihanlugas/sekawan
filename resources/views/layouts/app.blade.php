@@ -29,12 +29,12 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
-                        <div class="flex-shrink-0">
+                        <a href="{{ route('beranda') }}" class="flex-shrink-0 -ml-2 p-2">
                             <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg"
                                  alt="Workflow logo">
-                        </div>
+                        </a>
                         <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline">
+                            <div class="flex items-baseline">
                                 <a href="{{ route('beranda') }}"
                                    class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
                                 <a href="{{ route('tentang') }}"
