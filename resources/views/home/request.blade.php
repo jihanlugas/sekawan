@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header', 'Request')
+@section('header', 'Permintaan')
 
 @section('content')
     <div class="py-6 px-4 max-w-3xl mx-auto">
@@ -41,36 +41,6 @@
                                     @endif
                                 </div>
                             </div>
-                            {{--                            <div class="entry p-4">--}}
-                            {{--                                <div class="card mb-4 usertreeCard" style="width: 100%">--}}
-                            {{--                                    <img--}}
-                            {{--                                        class="card-img-top usertreeImage {{ $usertree->photo ? '' : 'btnInputimage' }} "--}}
-                            {{--                                        src="{{ $usertree->photo ? $usertree->photo : asset('img/default-photo.jpg') }}"--}}
-                            {{--                                        alt="Card image cap">--}}
-                            {{--                                    <input type="file" class="d-none inputImage" name="photo_id "--}}
-                            {{--                                           data-userid="{{ $usertree->user_id }}">--}}
-                            {{--                                    <input type="text" class="d-none" name="parent_id"--}}
-                            {{--                                           value="{{ $usertree->user_id }}">--}}
-                            {{--                                    <div class="card-body">--}}
-                            {{--                                        <h5 class="card-title usertreeStatus">--}}
-                            {{--                                            <label>{{ \App\Usertree::$status_photo[$usertree->status_photo] }}</label>--}}
-                            {{--                                        </h5>--}}
-                            {{--                                        <p class="card-text">{{ 'Name : ' . $usertree->user->name }}</p>--}}
-                            {{--                                        @if($usertree->status_photo == \App\Usertree::STATUS_PHOTO_WAITING)--}}
-                            {{--                                            <div class="form-group row mb-0">--}}
-                            {{--                                                <div class="col text-right">--}}
-                            {{--                                                    <button class="btn btn-danger btnReject"--}}
-                            {{--                                                            data-userid="{{ $usertree->user_id }}">Reject--}}
-                            {{--                                                    </button>--}}
-                            {{--                                                    <button class="btn btn-primary btnApprove"--}}
-                            {{--                                                            data-userid="{{ $usertree->user_id }}">Approve--}}
-                            {{--                                                    </button>--}}
-                            {{--                                                </div>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        @endif--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
                         @endforeach
                     @else
                         <div class="entry p-4">
@@ -79,34 +49,31 @@
                     @endif
                 </div>
                 <div class="accordion-item__detail p-3">
-                    <div class="accordion-item__detail-item">
-                        <div class="accordion-item__detail-item-title">
-                            Telah Didapat
-                        </div>
-                        <div class="accordion-item__detail-item-contain">
-                            <div class="">Jumlah</div>
-                            <div class="">{{ 'Rp ' . $mUsertree->total_didapat }}</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item__detail-item">
+                    <div class="accordion-item__detail-item flex justify-between items-center">
                         <div class="accordion-item__detail-item-title">
                             Belum Didapat
                         </div>
-                        <div class="accordion-item__detail-item-contain">
-                            <div class="">Jumlah</div>
+                        <div class="accordion-item__detail-item-contain font-bold">
                             <div class="">{{ 'Rp ' . $mUsertree->belum_didapat }}</div>
                         </div>
                     </div>
-
-                    <div class="accordion-item__detail-item">
+                    <div class="accordion-item__detail-item flex justify-between items-center">
                         <div class="accordion-item__detail-item-title">
-                            Total
+                            Telah Didapat
                         </div>
-                        <div class="accordion-item__detail-item-contain">
-                            <div class="">Jumlah</div>
-                            <div class="">{{ 'Rp ' . $mUsertree->total }}</div>
+                        <div class="accordion-item__detail-item-contain font-bold">
+                            <div class="">{{ 'Rp ' . $mUsertree->total_didapat }}</div>
                         </div>
                     </div>
+
+{{--                    <div class="accordion-item__detail-item">--}}
+{{--                        <div class="accordion-item__detail-item-title">--}}
+{{--                            Total--}}
+{{--                        </div>--}}
+{{--                        <div class="accordion-item__detail-item-contain">--}}
+{{--                            <div class="">{{ 'Rp ' . $mUsertree->total }}</div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         @endforeach

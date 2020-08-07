@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header', 'Undangan')
+@section('header', 'Kode Undangan')
 
 @section('content')
     <div class="py-6 px-4 max-w-3xl mx-auto">
@@ -15,12 +15,17 @@
                 <input id="invitation_cd" type="text"
                        class="form-input w-full @error('invitation_cd') border-red-500 @enderror"
                        name="invitation_cd" value="{{ old('invitation_cd') }}" required autofocus>
-
                 @error('invitation_cd')
                 <p class="text-red-500 text-xs italic mt-4">
                     {{ $message }}
                 </p>
                 @enderror
+                @if(Auth::user()->request_by)
+                    <p class="text-red-500 text-xs italic mt-4">
+                        * Jika anda memasukan kode undangan kembali, semua data dari kode undangan sebelumnya akan
+                        terhapus
+                    </p>
+                @endif
             </div>
             <div class="flex flex-wrap items-center justify-end">
                 <button type="submit"

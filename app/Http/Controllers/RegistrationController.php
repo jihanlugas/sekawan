@@ -75,6 +75,16 @@ class RegistrationController extends Controller
         $mUser = User::where('id', Auth::user()->id)->first();
         $mUserinvitation = User::where('invitation_cd', $request->invitation_cd)->first();
 
+        if ($mUser->request_by){
+            $mUsertree = Usertree::where('user_id', $mUser->id)->get();
+            foreach ($mUsertree as $usertree){
+                if ($usertree->photo_id){
+                    Photoupload::deletePhoto($usertree->photo_id);
+                }
+                $usertree->delete();
+            }
+        }
+
         if ($mUser && $mUserinvitation) {
             $mUserrequestlimit = User::where('request_by', $mUserinvitation->id)->get();
             if (count($mUserrequestlimit) < User::USER_REQUEST_LIMIT) {
@@ -103,7 +113,12 @@ class RegistrationController extends Controller
     {
         $mUsertrees = Usertree::with(['parent.userdetail.bank', 'photoupload', 'price'])->where('user_id', Auth::user()->id)->get();
         foreach ($mUsertrees as $i => $mUsertree) {
-            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addDay(Usertree::LIMIT_WAITING_DAY) <= Carbon::now())) {
+//            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addDay(Usertree::LIMIT_WAITING_DAY) <= Carbon::now())) {
+//                $mUsertrees[$i]->status_photo = Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED;
+//                $mUsertrees[$i]->save();
+//            }
+
+            if (($mUsertrees[$i]->status_photo == Usertree::STATUS_PHOTO_WAITING) && (Carbon::make($mUsertrees[$i]->updated_at)->addMinute(Usertree::LIMIT_WAITING_MINUTE) <= Carbon::now())) {
                 $mUsertrees[$i]->status_photo = Usertree::STATUS_PHOTO_AUTOMATIC_APPROVED;
                 $mUsertrees[$i]->save();
             }
@@ -160,6 +175,7 @@ class RegistrationController extends Controller
     {
         if (Usertree::cekIscompletedata(Auth::user()->id)) {
             $mUser = User::with(['userdetail'])->where('id', Auth::user()->id)->first();
+//            dd($mUser);
             return view('registration.completedata', ['mUser' => $mUser]);
         }else{
             return redirect(route('upload'));

@@ -16,8 +16,8 @@ class PriceSeeder extends Seeder
         $aarPrices = [
             [
                 'name' => 'Standart',
-                'non_admin_price' => 25000,
-                'admin_price' => 15000,
+                'non_admin_price' => \App\User::USER_PRICE_SEEDER_NON_ADMIN,
+                'admin_price' => \App\User::USER_PRICE_SEEDER_ADMIN,
                 'is_active' => 1,
             ],
         ];

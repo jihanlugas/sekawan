@@ -1,15 +1,20 @@
 @extends('layouts.app')
 
-@section('header', 'Complate Data')
+@section('header', 'Data Anggota')
 
 @section('content')
+    <?php
+//        if($errors->all()){
+//            dd($errors->all());
+//        }
+    ?>
     <div class="py-6 px-4 max-w-3xl mx-auto">
         @include('layouts.flash')
         <form method="POST" action="{{ route('completedata') }}">
             @csrf
             <div class="flex flex-wrap mb-6">
                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Name') }}
+                    {{ __('Nama') }}
                 </label>
                 <input id="name" type="text" class="form-input w-full cursor-not-allowed bg-gray-200" name="name"
                        value="{{ $mUser->name }}" readonly>
@@ -25,12 +30,12 @@
 
             <div class="flex flex-wrap mb-6 relative">
                 <label for="birth_dt" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Birth Date') }}
+                    {{ __('Tanggal Lahir') }}
                 </label>
 
                 <input id="birth_dt" type="text"
                        class="form-input w-full flatpickr @error('birth_dt') border-red-500 @enderror" name="birth_dt"
-                       value="{{ old('birth_dt') }}" autofocus>
+                       value="{{ old('birth_dt') }}" placeholder="Tanggal Lahir"  autofocus>
 
                 @error('birth_dt')
                 <p class="text-red-500 text-xs italic mt-4">
@@ -41,21 +46,16 @@
 
             <div class="flex flex-wrap mb-6">
                 <label for="bank_id" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Bank Account Number') }}
+                    {{ __('Nama Bank') }}
                 </label>
                 <div class="relative w-full">
-                    <select class="block form-input appearance-none w-full pr-8" id="grid-state" name="bank_id"
-                            value="{{ old('bank_id') }}" required autofocus>
-                        <option>Select Bank</option>
+                    <select class="block form-input appearance-none w-full pr-8 @error('bank_id') border-red-500 @enderror" id="grid-state" name="bank_id"
+                            value="{{ old('bank_id') }}" autofocus>
+                        <option value="">Select Bank</option>
                         @foreach(\App\Bank::orderBy('bank_cd', 'asc')->get() as $bank)
                             <option
                                 value="{{ $bank->id }}">{{ $bank->bank_cd . ' - ' . $bank->name}}</option>
                         @endforeach
-                        @error('bank_id')
-                        <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                        @enderror
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -63,16 +63,21 @@
                         </svg>
                     </div>
                 </div>
+                @error('bank_id')
+                    <p class="text-red-500 text-xs italic mt-4">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             <div class="flex flex-wrap mb-6">
                 <label for="bank_account_number" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Bank Account Number') }}
+                    {{ __('No. Rekening') }}
                 </label>
 
                 <input id="bank_account_number" type="text"
                        class="form-input w-full @error('bank_account_number') border-red-500 @enderror"
-                       name="bank_account_number" value="{{ old('bank_account_number') }}" autofocus>
+                       name="bank_account_number" value="{{ old('bank_account_number') }}" placeholder="No. Rekening"  autofocus>
 
                 @error('bank_account_number')
                 <p class="text-red-500 text-xs italic mt-4">
@@ -83,12 +88,12 @@
 
             <div class="flex flex-wrap mb-6">
                 <label for="bank_account_name" class="block text-gray-700 text-sm font-bold mb-2">
-                    {{ __('Bank Account Name') }}
+                    {{ __('Atas Nama Rekening') }}
                 </label>
 
                 <input id="bank_account_name" type="text"
                        class="form-input w-full @error('bank_account_name') border-red-500 @enderror"
-                       name="bank_account_name" value="{{ old('bank_account_name') }}" autofocus>
+                       name="bank_account_name" value="{{ old('bank_account_name') }}" placeholder="Nama Pemilik Rekening"  autofocus>
 
                 @error('bank_account_name')
                 <p class="text-red-500 text-xs italic mt-4">
@@ -146,7 +151,7 @@
     {{--                                    <div class="col-md-12">--}}
     {{--                                        <label for="email" class="">{{ __('Select Bank') }}</label>--}}
     {{--                                        <select name="bank_id" class="form-control @error('bank_id') is-invalid @enderror"--}}
-    {{--                                                required autofocus>--}}
+    {{--                                                 autofocus>--}}
     {{--                                            <option>Select Bank</option>--}}
     {{--                                            @foreach(\App\Bank::orderBy('bank_cd', 'asc')->get() as $bank)--}}
     {{--                                                <option--}}

@@ -11,6 +11,7 @@ class Uploadinc extends Model
 
     const RUNNING_LIMIT = 8000; //8000 Files
     const FILE_DIRECTORY = 'uploads';
+    const FILE_DIRECTORY_RESIZE = '400';
 
     public static function getUploadinctoupload($id){
         $mUploadinc = Uploadinc::where('ref_tableid', $id)
@@ -28,6 +29,7 @@ class Uploadinc extends Model
                 $mUploadinc = $mUploadincnew;
 
                 Storage::makeDirectory($mUploadinc->folder_name);
+//                Storage::makeDirectory($mUploadinc->folder_name . '/' . self::FILE_DIRECTORY_RESIZE);
             }
         }else{
             $mUploadinc = New Uploadinc();
@@ -38,6 +40,7 @@ class Uploadinc extends Model
             $mUploadinc->save();
 
             Storage::makeDirectory($mUploadinc->folder_name);
+//            Storage::makeDirectory($mUploadinc->folder_name . '/' . self::FILE_DIRECTORY_RESIZE);
         }
 
         return $mUploadinc;

@@ -17,154 +17,20 @@ class UserSeeder extends Seeder
     {
         $aarUsers = [
             [
-                'name' => 'Lawanna Kelm',
+                'name' => 'Madina Milatil Arta',
+                'invitation_cd' => 'madina',
             ],
             [
-                'name' => 'Jeffrey Diebold',
+                'name' => 'Lita Desrita',
+                'invitation_cd' => 'litad',
             ],
             [
-                'name' => 'Rae Tenny',
+                'name' => 'Dewi',
+                'invitation_cd' => 'dewif',
             ],
             [
-                'name' => 'Kathrin Stjean',
-            ],
-            [
-                'name' => 'Tatyana Alonso',
-            ],
-            [
-                'name' => 'Joy Baril',
-            ],
-            [
-                'name' => 'Stephaine Ehrhardt',
-            ],
-            [
-                'name' => 'Christina Bjelland',
-            ],
-            [
-                'name' => 'Kathyrn Moreton',
-            ],
-            [
-                'name' => 'Kera Kremer',
-            ],
-            [
-                'name' => 'Mattie Bornstein',
-            ],
-            [
-                'name' => 'Nathan Bean',
-            ],
-            [
-                'name' => 'Felecia Saladino',
-            ],
-            [
-                'name' => 'Numbers Mijangos',
-            ],
-            [
-                'name' => 'Stacia Buzard',
-            ],
-            [
-                'name' => 'Fausto Wiliams',
-            ],
-            [
-                'name' => 'Renna Kinsman',
-            ],
-            [
-                'name' => 'Nathaniel Zucker',
-            ],
-            [
-                'name' => 'Tabatha Mckeen',
-            ],
-            [
-                'name' => 'Eula Lino',
-            ],
-            [
-                'name' => 'Mellissa Ullman',
-            ],
-            [
-                'name' => 'Milan Keala',
-            ],
-            [
-                'name' => 'Jc Peay',
-            ],
-            [
-                'name' => 'Keturah Amburn',
-            ],
-            [
-                'name' => 'Lloyd Brault',
-            ],
-            [
-                'name' => 'Luciano Mumme',
-            ],
-            [
-                'name' => 'Kip Duclos',
-            ],
-            [
-                'name' => 'Ja Stainback',
-            ],
-            [
-                'name' => 'Daysi Elamin',
-            ],
-            [
-                'name' => 'Carmelia Perret',
-            ],
-            [
-                'name' => 'Laura Heidenreich',
-            ],
-            [
-                'name' => 'Hassan Lahman',
-            ],
-            [
-                'name' => 'Kenya Rohe',
-            ],
-            [
-                'name' => 'Etta Bizzell',
-            ],
-            [
-                'name' => 'Sanford Ingalls',
-            ],
-            [
-                'name' => 'Aiko Valez',
-            ],
-            [
-                'name' => 'Trula Salvetti',
-            ],
-            [
-                'name' => 'Cassaundra Pritts',
-            ],
-            [
-                'name' => 'Luigi Simms',
-            ],
-            [
-                'name' => 'Fleta Sigala',
-            ],
-            [
-                'name' => 'Pia Rangel',
-            ],
-            [
-                'name' => 'Azalee Condit',
-            ],
-            [
-                'name' => 'Almeda Asmussen',
-            ],
-            [
-                'name' => 'Tory Moitoso',
-            ],
-            [
-                'name' => 'Neville Wooster',
-            ],
-            [
-                'name' => 'Jana Crichton',
-            ],
-            [
-                'name' => 'Elsy Low',
-            ],
-            [
-                'name' => 'Corrie Guillotte',
-            ],
-            [
-                'name' => 'Kathlyn Hannah',
-            ],
-            [
-                'name' => 'Bee Huffine',
+                'name' => 'Jihan Lugas',
+                'invitation_cd' => 'jihan',
             ],
         ];
 
@@ -178,7 +44,7 @@ class UserSeeder extends Seeder
 
         $request_by = 0;
         foreach ($aarUsers as $i => $user) {
-            if ($i > 10)
+            if ($i > 5)
                 break;
 
             $mUser = new User();
@@ -187,7 +53,8 @@ class UserSeeder extends Seeder
             $mUser->is_complete = '1';
             $mUser->password = Hash::make('123456');
             $mUser->request_by = $request_by;
-            $mUser->invitation_cd = Str::random(5);
+//            $mUser->invitation_cd = Str::random(5);
+            $mUser->invitation_cd = strtolower($user['invitation_cd']);
             $mUser->save();
 
             $request_by = $mUser->id;

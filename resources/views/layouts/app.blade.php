@@ -29,21 +29,21 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
-                        <div class="flex-shrink-0">
+                        <a href="{{ route('beranda') }}" class="flex-shrink-0 -ml-2 p-2">
                             <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-on-dark.svg"
                                  alt="Workflow logo">
-                        </div>
+                        </a>
                         <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline">
+                            <div class="flex items-baseline">
                                 <a href="{{ route('beranda') }}"
                                    class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
                                 <a href="{{ route('tentang') }}"
                                    class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
-                                <a href="{{ route('tentang') }}"
+                                <a href="{{ route('petunjuk') }}"
                                    class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Petunjuk</a>
-                                <a href="{{ route('tentang') }}"
-                                   class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan
-                                    Sosial</a>
+{{--                                <a href="{{ route('tentang') }}"--}}
+{{--                                   class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan--}}
+{{--                                    Sosial</a>--}}
                             </div>
                         </div>
                         @guest
@@ -55,7 +55,7 @@
                                 {{--                                <div class="hidden md:block">--}}
                                 {{--                                    <div class="ml-10 flex items-baseline">--}}
                                 {{--                                        <a href="{{ route('invitation') }}"--}}
-                                {{--                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Invitation</a>--}}
+                                {{--                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kode Undangan</a>--}}
                                 {{--                                        <a href="{{ route('upload') }}"--}}
                                 {{--                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Upload</a>--}}
                                 {{--                                    </div>--}}
@@ -76,12 +76,12 @@
                                 @if(Auth::user()->is_complete)
                                     <div class="ml-10 flex items-baseline">
                                         <a href="{{ route('request') }}"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Request</a>
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Permintaan</a>
                                     </div>
                                 @else
                                     <div class="ml-10 flex items-baseline">
                                         <a href="{{ route('invitation') }}"
-                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Invitation</a>
+                                           class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kode Undangan</a>
                                         <a href="{{ route('upload') }}"
                                            class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Upload</a>
                                     </div>
@@ -92,7 +92,7 @@
                                             class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
                                             id="user-menu-toggle" aria-label="User menu" aria-haspopup="true">
                                             <img class="h-8 w-8 rounded-full"
-                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                 src="{{ asset('img/default-user.png') }}"
                                                  alt="">
                                         </button>
                                     </div>
@@ -146,11 +146,11 @@
                        class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Beranda</a>
                     <a href="{{ route('tentang') }}"
                        class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tentang</a>
-                    <a href="{{ route('tentang') }}"
+                    <a href="{{ route('petunjuk') }}"
                        class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Petunjuk</a>
-                    <a href="{{ route('tentang') }}"
-                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan
-                        Sosial</a>
+{{--                    <a href="{{ route('tentang') }}"--}}
+{{--                       class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Kegiatan--}}
+{{--                        Sosial</a>--}}
                 </div>
                 @guest
 
@@ -173,12 +173,12 @@
                         <div class="flex items-center px-5">
                             <div class="flex-shrink-0">
                                 <img class="h-10 w-10 rounded-full"
-                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                     src="{{ asset('img/default-user.png') }}"
                                      alt="">
                             </div>
                             <div class="ml-3">
-                                <div class="text-base font-medium leading-none text-white">Tom Cook</div>
-                                <div class="mt-1 text-sm font-medium leading-none text-gray-400">tom@example.com</div>
+                                <div class="text-base font-medium leading-none text-white">{{ Auth::user()->name }}</div>
+                                <div class="mt-1 text-sm font-medium leading-none text-gray-400">{{ Auth::user()->email }}</div>
                             </div>
                         </div>
                         <div class="mt-3 px-2">
@@ -188,11 +188,11 @@
                                     Profile</a>
                                 <a href="{{ route('request') }}"
                                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
-                                    Request</a>
+                                    Permintaan</a>
                             @else
                                 <a href="{{ route('invitation') }}"
                                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
-                                    Invitation</a>
+                                    Kode Undangan</a>
                                 <a href="{{ route('upload') }}"
                                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
                                     Upload</a>
