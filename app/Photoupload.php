@@ -3,13 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Intervention\Image\Facades\Image;
 
 class Photoupload extends Model
 {
     protected $guarded = [];
 
+    const RESIZE = '350';
 
     const FILE_DIRECTORY = 'uploads';
+    const FILE_DIRECTORY_RESIZE = self::RESIZE;
 
     const REF_TYPE_TABLE_USERTREES = 1;
 
@@ -19,6 +22,19 @@ class Photoupload extends Model
 //    }
 
     public static function getFilepath($id)
+    {
+        $mPhotoupload = Photoupload::where('id', $id)->first();
+        if (!empty($mPhotoupload)) {
+            if ($mPhotoupload->file_path_resize)
+                return asset($mPhotoupload->file_path_resize);
+            else
+                self::getFilepathOrigin($id);
+        } else {
+            return false;
+        }
+    }
+
+    public static function getFilepathOrigin($id)
     {
         $mPhotoupload = Photoupload::where('id', $id)->first();
         if (!empty($mPhotoupload)) {
@@ -41,12 +57,19 @@ class Photoupload extends Model
         $data->file_name = str_replace(' ', '-', $data->alt_file);
         $data->ext_file = $request->getClientOriginalExtension();
         $data->file_path = $data->folder_name . '/' . $data->file_name;
+        $data->file_path_resize = $data->folder_name . '/' . self::RESIZE . '/' . $data->file_name;
         $data->size = $request->getSize();
         $path = $request->move($data->folder_name, $data->file_name);
         $dataPath = getimagesize($path);
         $data->width = $dataPath[0];
         $data->height = $dataPath[1];
 
+        $img = Image::make($path);
+        $img->resize(self::FILE_DIRECTORY_RESIZE, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $img->save($data->file_path_resize);
         $data->save();
 
         return $data->id;
