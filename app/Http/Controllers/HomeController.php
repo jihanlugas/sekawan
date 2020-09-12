@@ -64,7 +64,6 @@ class HomeController extends AuthController
                 $mUsertrees[$level][$i]->photo = Photoupload::getFilepath($mUsertree->photo_id);
             }
 
-
             if ($qTotalusertree->total_didapat){
                 $mUsertrees[$level]->total_didapat = $qTotalusertree->total_didapat;
             }else {
